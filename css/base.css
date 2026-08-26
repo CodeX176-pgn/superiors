@@ -1,0 +1,204 @@
+/*
+============================================================
+SUPERIORS — GLOBAL / BASE STYLES
+============================================================
+
+This stylesheet establishes the shared dark visual language for
+both the student directory and profile page. Component-specific
+rules remain in their dedicated CSS files.
+============================================================
+*/
+
+/* =========================================================
+   1. GLOBAL RESET & THEME TOKENS
+   ========================================================= */
+
+:root {
+    /* Core colors used throughout the dark SUPERIORS theme. */
+    --bg-deep: #05050d;
+    --bg-panel: rgba(8, 8, 18, 0.82);
+    --bg-panel-strong: rgba(9, 9, 20, 0.94);
+    --surface: rgba(18, 17, 34, 0.82);
+    --surface-hover: rgba(28, 25, 50, 0.9);
+
+    --text-primary: #f7f4ff;
+    --text-secondary: rgba(235, 230, 250, 0.72);
+    --text-muted: rgba(215, 207, 235, 0.55);
+
+    --purple: #a970ff;
+    --purple-bright: #c59aff;
+    --purple-soft: rgba(169, 112, 255, 0.18);
+    --purple-border: rgba(169, 112, 255, 0.34);
+
+    --border: rgba(255, 255, 255, 0.10);
+    --border-strong: rgba(169, 112, 255, 0.28);
+
+    --shadow: 0 20px 55px rgba(0, 0, 0, 0.42);
+    --shadow-purple: 0 0 28px rgba(130, 74, 230, 0.14);
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    background: var(--bg-deep);
+}
+
+/*
+   The body uses the supplied SUPERIORS artwork as the global
+   background. The layered gradients keep foreground content
+   readable while still allowing the purple/gold artwork to show.
+*/
+body {
+    position: relative;
+    isolation: isolate;
+
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--text-primary);
+
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow-x: hidden;
+    background-color: var(--bg-deep);
+
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    color-scheme: dark;
+}
+
+/*
+   Fixed background layer. Keeping it separate from the content
+   prevents cards/footer panels from changing the actual artwork.
+*/
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+
+    background-image:
+        linear-gradient(
+            180deg,
+            rgba(3, 3, 10, 0.48) 0%,
+            rgba(5, 4, 15, 0.58) 50%,
+            rgba(3, 3, 10, 0.72) 100%
+        ),
+        url("../assets/images/superiors_background.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    pointer-events: none;
+}
+
+/* A subtle dark veil prevents the background from overpowering text. */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+
+    background:
+        radial-gradient(circle at 50% 18%, rgba(137, 77, 255, 0.10), transparent 35%),
+        linear-gradient(180deg, rgba(4, 4, 12, 0.08), rgba(4, 4, 12, 0.22));
+
+    pointer-events: none;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+a {
+    color: inherit;
+}
+
+/* =========================================================
+   2. SHARED ANIMATIONS
+   ========================================================= */
+
+@keyframes cardEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes profileEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes profileImageEntrance {
+    from {
+        opacity: 0;
+        transform: scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* =========================================================
+   31. REFERENCE-MATCH BACKGROUND REFINEMENT
+   ========================================================= */
+
+/*
+   The supplied artwork is intentionally kept as a fixed,
+   full-viewport background.  A slightly lighter top-to-bottom
+   veil lets the decorative purple details remain visible while
+   preserving strong contrast for the directory content.
+*/
+body::before {
+    background-image:
+        linear-gradient(
+            180deg,
+            rgba(3, 3, 10, 0.34) 0%,
+            rgba(5, 4, 15, 0.52) 48%,
+            rgba(3, 3, 10, 0.68) 100%
+        ),
+        url("../assets/images/superiors_background.png");
+
+    background-size: cover;
+    background-position: center 42%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}

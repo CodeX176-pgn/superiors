@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--? WEBSITE FAVICON -->
+        <link
+            rel="icon"
+            href="assets/images/superiors_icon.png"
+            type="image/png"
+        >
+        <title>SUPERIORS</title>
+
+
+        <!-- ========================================================
+            ? FUNCTIONAL STYLESHEETS
+            --------------------------------------------------------
+            Stylesheets are loaded in cascade order.
+
+            The intro stylesheet is loaded after the main site
+            styles so its full-screen overlay remains independent
+            from the directory layout.
+            ======================================================== -->
+        <link rel="stylesheet" href="css/base.css">
+        <link rel="stylesheet" href="css/header.css">
+        <link rel="stylesheet" href="css/cards.css">
+        <link rel="stylesheet" href="css/profile.css">
+        <link rel="stylesheet" href="css/footer.css">
+        <link rel="stylesheet" href="css/accessibility.css">
+        <link rel="stylesheet" href="css/responsive.css">
+
+        <!-- ============================================================
+           ? SUPERIORS CINEMATIC INTRO
+             ------------------------------------------------------------
+            Intro styles are separated by responsibility so individual
+            visual components can be modified without affecting the
+            rest of the website.
+            ============================================================ -->
+        <!-- Intro container, stacking, and lifecycle states -->
+        <link rel="stylesheet" href="css/intro/intro_root.css">
+        <!-- Purple and gold diagonal panels -->
+        <link rel="stylesheet" href="css/intro/bg_panel.css">
+        <!-- Diagonal edge highlight -->
+        <link rel="stylesheet" href="css/intro/edge_highlight.css">
+        <!-- Atmospheric particle texture -->
+        <link rel="stylesheet" href="css/intro/particles.css">
+        <!-- Intro content and "Meet" text -->
+        <link rel="stylesheet" href="css/intro/intro_content.css">
+        <!-- SUPERIORS emblem -->
+        <link rel="stylesheet" href="css/intro/emblem.css">
+        <!-- THE SUPERIORS title -->
+        <link rel="stylesheet" href="css/intro/title.css">
+        <!-- Entrance and reveal animations -->
+        <link rel="stylesheet" href="css/intro/animations.css">
+        <!-- Mobile/tablet adjustments -->
+        <link rel="stylesheet" href="css/intro/intro_responsive.css">
+
+
+        <!-- ========================================================
+            ? REMIX ICON - LOCAL VERSION
+            --------------------------------------------------------
+            Remix Icon is stored locally so SUPERIORS does not depend
+            on an external CDN for its interface icons.
+
+            This allows the project to use classes such as:
+            ri-search-line
+            ri-github-fill
+            ri-home-line
+            etc.
+            ======================================================== -->
+        <link rel="stylesheet" href="assets/remixicon/remixicon.css">
+
+    </head>
+
+
+    <body>
+
+        <!-- ============================================================
+           ? SUPERIORS — CINEMATIC INTRO
+            ------------------------------------------------------------
+            This is the opening scene displayed when the homepage loads.
+
+            Structure:
+            - Gold and purple diagonal background panels
+            - Decorative edge highlight
+            - Atmospheric particle texture
+            - SUPERIORS emblem
+            - "Meet" introductory text
+            - Main "THE SUPERIORS" title
+            - Decorative divider
+
+            intro.js controls the lifecycle of this element and removes
+            it completely after the reveal animation finishes.
+            ============================================================ -->
+
+        <div
+            class="superiors-intro"
+            id="superiorsIntro"
+            aria-label="SUPERIORS introduction"
+        >
+
+            <!-- ========================================================
+               * DIAGONAL BACKGROUND PANELS
+                --------------------------------------------------------
+                The purple panel sits above the gold panel and casts a
+                shadow onto it, creating the layered diagonal effect.
+                ======================================================== -->
+
+            <div
+                class="intro-panel intro-panel--gold"
+                aria-hidden="true"
+            ></div>
+
+            <div
+                class="intro-panel intro-panel--purple"
+                aria-hidden="true"
+            ></div>
+
+
+            <!-- ========================================================
+               * INTRO CONTENT
+                --------------------------------------------------------
+                This remains above the background panels and fades away
+                shortly before the panels begin their final movement.
+                ======================================================== -->
+
+            <div class="intro-content">
+
+                <!-- SUPERIORS emblem -->
+                <img
+                    class="intro-emblem"
+                    src="assets/images/superiors_icon.png"
+                    alt=""
+                    aria-hidden="true"
+                >
+
+                <!-- Introductory word -->
+                <p class="intro-meet">
+                    Meet
+                </p>
+
+                <!-- Main title -->
+                <h1 class="intro-title">
+                    THE SUPERIORS
+                </h1>
+
+                <!-- Decorative divider -->
+                <div
+                    class="intro-decoration"
+                    aria-hidden="true"
+                >
+                    <span></span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ========================================================
+            ? ACCESSIBILITY
+            --------------------------------------------------------
+            Allows keyboard and screen-reader users to skip directly
+            to the main content.
+            ======================================================== -->
+        <a
+            class="skip-link"
+            href="#main-content"
+        >
+            Skip to main content
+        </a>
+
+        <!-- ========================================================
+            ? MAIN SITE HEADER
+            ======================================================== -->
+
+        <header class="site-header">
+            <div class="header-container">
+                <!-- Website logo / name -->
+                <a
+                    href="index.html"
+                    class="logo"
+                    aria-label="SUPERIORS home"
+                >
+                    SUPERIORS
+                </a>
+
+                <!-- =================================================
+                    * SEARCH AREA
+                    ================================================= -->
+                <form
+                    class="search-wrapper"
+                    role="search"
+                    aria-label="Student directory search"
+                    onsubmit="return false;"
+                >
+                    <!-- Search icon -->
+                    <i
+                        class="ri-search-line search-icon"
+                        aria-hidden="true"
+                    ></i>
+                    <!-- Search input -->
+                    <input
+                        type="search"
+                        id="searchInput"
+                        class="search-input"
+                        placeholder="Search by name or serial number..."
+                        aria-label="Search students by name or serial number"
+                        aria-describedby="searchHelp"
+                        autocomplete="off"
+                    >
+
+                    <!-- Screen-reader search instructions -->
+                    <span
+                        id="searchHelp"
+                        class="sr-only"
+                    >
+                        Results update automatically as you type.
+                    </span>
+                </form>
+            </div>
+        </header>
+
+
+        <!-- ========================================================
+            ? STUDENT DIRECTORY
+            --------------------------------------------------------
+            Student cards are generated dynamically from data.js
+            by the directory JavaScript modules.
+            ======================================================== -->
+
+        <main
+            class="students-section"
+            id="main-content"
+            tabindex="-1"
+            aria-labelledby="directory-heading"
+        >
+            <!-- Accessible page heading -->
+            <h1
+                id="directory-heading"
+                class="sr-only"
+            >
+                SUPERIORS Student Directory
+            </h1>
+
+            <!-- Student cards are inserted here by JavaScript -->
+            <div
+                class="students-grid"
+                id="studentsGrid"
+            ></div>
+        </main>
+
+
+        <!-- ========================================================
+            ? SITE FOOTER
+            ======================================================== -->
+
+        <footer class="site-footer">
+            <div class="footer-container">
+                <!-- =================================================
+                    * FOOTER BRANDING
+                    ================================================= -->
+                <div class="footer-brand">
+                    <a
+                        href="index.html"
+                        class="footer-logo"
+                        aria-label="SUPERIORS Home"
+                    >
+                        SUPERIORS
+                    </a>
+
+                    <p class="footer-tagline">
+                        The official student directory and showcase profiles.
+                    </p>
+
+                    <!-- Small SUPERIORS emblem -->
+                    <img
+                        class="footer-brand-mark"
+                        src="assets/images/superiors_icon.png"
+                        alt=""
+                        aria-hidden="true"
+                        loading="lazy"
+                        decoding="async"
+                    >
+                </div>
+
+
+                <!-- =================================================
+                    * FOOTER NAVIGATION
+                    ================================================= -->
+                <nav
+                    class="footer-nav"
+                    aria-label="Footer Navigation"
+                >
+                    <h3 class="footer-heading">
+                        Navigation
+                    </h3>
+
+                    <ul class="footer-links">
+                        <li>
+                            <a
+                                href="index.html"
+                                class="footer-link"
+                            >
+                                Home
+                            </a>
+                        </li>
+
+                        <li>
+                            <a
+                                href="index.html#main-content"
+                                class="footer-link"
+                            >
+                                Browse Students
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- =================================================
+                    * PROJECT CREATORS
+                    ================================================= -->
+
+                <div class="footer-creators">
+                    <h3 class="footer-heading">
+                        Created By
+                    </h3>
+
+                    <ul class="creator-list">
+                        <!-- CodeX GitHub profile -->
+                        <li class="creator-item">
+                            <a
+                                href="https://github.com/codex176-pgn"
+                                class="creator-github-link"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label="CodeX on GitHub (CodeX176-pgn)"
+                                title="CodeX on GitHub"
+                            >
+                                <i
+                                    class="ri-github-fill"
+                                    aria-hidden="true"
+                                ></i>
+                                <span class="creator-name">
+                                    CodeX
+                                </span>
+                                <span class="creator-handle">
+                                    CodeX176-pgn
+                                </span>
+                            </a>
+                        </li>
+
+                        <!-- Ugwe GitHub profile -->
+                        <li class="creator-item">
+                            <a
+                                href="https://github.com/ugwe123-abc"
+                                class="creator-github-link"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label="Ugwe on GitHub (Ugwe123-abc)"
+                                title="Ugwe on GitHub"
+                            >
+                                <i
+                                    class="ri-github-fill"
+                                    aria-hidden="true"
+                                ></i>
+                                <span class="creator-name">
+                                    Ugwe
+                                </span>
+                                <span class="creator-handle">
+                                    ugwe123-abc
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ====================================================
+                * FOOTER COPYRIGHT BAR
+                ==================================================== -->
+            <div class="footer-bottom">
+                <div class="footer-bottom-container">
+                    <p class="footer-copyright">
+                        &copy; 2026 SUPERIORS.
+                        Developed by CodeX &amp; Ugwe.
+                        <br>
+                        Worldwide 2K29 Prodogies
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- ========================================================
+            ? JAVASCRIPT
+            --------------------------------------------------------
+            Scripts are intentionally loaded at the bottom of the
+            document so the HTML is available before initialization.
+            ======================================================== -->
+
+        <!-- ========================================================
+            * CINEMATIC INTRO
+            ======================================================== -->
+        <script src="js/intro.js"></script>
+
+        <!-- ========================================================
+            * STUDENT DATA
+            --------------------------------------------------------
+            Student data must be loaded before the directory logic.
+            ======================================================== -->
+        <script src="js/data.js"></script>
+
+        <!-- ========================================================
+            * SOCIAL MEDIA HELPERS
+            ======================================================== -->
+        <script src="js/social.js"></script>
+
+        <!-- ========================================================
+            * DIRECTORY JAVASCRIPT
+            --------------------------------------------------------
+            These classic scripts load in dependency order.
+            No ES-module configuration is required.
+            ======================================================== -->
+        <!-- DOM references and accessibility announcements -->
+        <script src="js/directory/dom.js"></script>
+        <!-- Reusable HTML/image helpers -->
+        <script src="js/directory/helpers.js"></script>
+        <!-- Student-card social-link generation -->
+        <script src="js/directory/social-links.js"></script>
+        <!-- Student-card component -->
+        <script src="js/directory/card.js"></script>
+        <!-- Sorting and rendering -->
+        <script src="js/directory/render.js"></script>
+        <!-- Search/filtering -->
+        <script src="js/directory/search.js"></script>
+        <!-- Touchscreen card interactions -->
+        <script src="js/directory/touch.js"></script>
+
+
+        <!--? Directory entry point / initialization -->
+        <script src="js/script.js"></script>
+
+    </body>
+
+</html>
