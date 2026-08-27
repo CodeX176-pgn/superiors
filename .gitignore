@@ -1,0 +1,25 @@
+# ============================================================
+# SUPERIORS — Git Ignore Rules
+# ============================================================
+
+# Node.js dependencies
+node_modules/
+
+# Environment/secrets
+.env
+.env.*
+
+# Local editor/system files
+.vscode/
+.idea/
+*.log
+
+# Windows generated files
+Thumbs.db
+Desktop.ini
+
+# Backup files
+*backup.*
+
+# Project ZIP archive
+*.zip
