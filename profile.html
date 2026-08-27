@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Make the profile page responsive on phones/tablets. -->
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <link rel="icon" href="assets/images/superiors_icon.png" type="png/image">
+    <!-- JavaScript replaces this title with the student's name. -->
+    <title>Student Profile — SUPERIORS</title>
+
+    <!--
+        Functional stylesheets are loaded in cascade order.
+        Keeping them separate makes the project easier to maintain
+        without changing the visual behavior of the existing site.
+    -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/cards.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/accessibility.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <!-- ============================================================
+    ?    REMIX ICON
+        ------------------------------------------------------------
+        Loads the Remix Icon library from jsDelivr CDN.
+        This allows us to use Remix Icon classes such as:
+        ri-search-line, ri-home-line, ri-github-fill, etc.
+        ============================================================ -->
+    <link rel="stylesheet" href="assets/remixicon/remixicon.css">
+
+</head>
+
+<body class="profile-page">
+
+    <!-- Keyboard users can bypass the header and move directly to the profile. -->
+    <a class="skip-link" href="#profileContent">Skip to profile content</a>
+
+    <!-- =========================================================
+        PROFILE HEADER
+       ========================================================= -->
+
+    <header class="site-header">
+        <div class="header-container profile-header-container">
+
+            <!--
+                Back button.
+
+                history.back() returns the user to the student list,
+                while profile.js also provides a fallback to index.html
+                when there is no useful browser history.
+            -->
+            <button
+                type="button"
+                class="back-button"
+                id="backButton"
+                aria-label="Go back to student list"
+            >
+                <i class="ri-arrow-left-s-fill" aria-hidden="true"></i>
+                <span>Back</span>
+            </button>
+
+            <!-- Website name returns to the homepage. -->
+            <a
+            href="index.html"
+            class="logo"
+            data-skip-intro
+            aria-label="SUPERIORS home"
+            >
+                <i class="ri-home-4-line"></i>
+                SUPERIORS
+            </a>
+
+        </div>
+    </header>
+
+
+    <!-- =========================================================
+        PROFILE CONTENT
+       ========================================================= -->
+
+    <main class="profile-section" id="profileContent" tabindex="-1" aria-labelledby="profileName">
+
+        <!--
+            The left side contains the student's text information.
+            The right side contains the fixed large image.
+        -->
+        <div class="profile-layout" id="profileLayout">
+
+            <!-- =================================================
+                INFORMATION PANEL
+               ================================================= -->
+
+            <section class="profile-information" aria-labelledby="profileName">
+
+                <!-- Small identifier shown above the name. -->
+                <p class="profile-serial" id="profileSerial">
+                    #---
+                </p>
+
+                <!-- Student's nickname/title/name. -->
+                <p class="profile-nickname" id="profileNickname">
+                    Loading...
+                </p>
+
+                <h1 class="profile-name" id="profileName">
+                    Loading student profile...
+                </h1>
+
+                <p class="profile-title" id="profileTitle"></p>
+                
+                <!-- =============================================
+                    SOCIAL LINKS
+                   ============================================= -->
+
+                <div class="profile-social-section">
+
+                    <h2 class="profile-section-heading" id="social-heading">
+                        Social Media
+                    </h2>
+
+                    <div
+                        class="profile-socials"
+                        id="profileSocials"
+                        aria-labelledby="social-heading"
+                    ></div>
+
+                </div>
+
+                <!-- =============================================
+                    INFORMATION TABLE
+                   ============================================= -->
+
+                <div class="profile-table-wrapper">
+
+                    <h2 class="profile-section-heading" id="information-heading">
+                        Information
+                    </h2>
+
+                    <table class="profile-table" aria-labelledby="information-heading">
+                        <!--
+                            Profile rows are generated dynamically by profile.js.
+
+                            This keeps the table synchronized with data.js: if you
+                            add Date of Birth, State of Origin, Hobbies, Email,
+                            or another supported field to a student object, it
+                            automatically appears here without editing this HTML.
+                        -->
+                        <tbody id="profileInformationBody">
+                            <tr>
+                                <td colspan="2" class="profile-table-loading">
+                                    Loading information...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                FIXED PROFILE IMAGE
+               ================================================= -->
+
+            <aside class="profile-image-column">
+
+                <div class="profile-image-card">
+
+                    <!--
+                        The large image is positioned inside a
+                        fixed container by CSS on desktop screens.
+                    -->
+                    <img
+                        id="profileImage"
+                        loading="eager"
+                        decoding="async"
+                        class="profile-large-image"
+                        src=""
+                        alt=""
+                    >
+
+                    <!-- Subtle image label. -->
+                    <div class="profile-image-caption">
+                        <span id="profileImageName">
+                            Student
+                        </span>
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+
+        <!-- =====================================================
+            INVALID PROFILE STATE
+           ===================================================== -->
+
+    </main>
+
+    <!--
+        This error state is separate from the normal profile layout.
+        It is shown only when the URL contains an invalid student ID.
+    -->
+    <section
+        class="profile-error"
+        id="profileError"
+        role="alert"
+        aria-labelledby="profile-error-heading"
+        hidden
+    >
+        <i class="ri-user-unfollow-line" aria-hidden="true"></i>
+
+        <h1 id="profile-error-heading">Profile not found</h1>
+
+        <p>
+            The student profile you're looking for does not exist.
+        </p>
+
+        <!-- Return Button -->
+        <a href="index.html" class="profile-home-button" data-skip-intro>
+            Return To Students
+        </a>
+    </section>
+
+    <!-- Student data must be loaded before profile.js -->
+    <script src="js/data.js"></script>
+
+    <!-- Shared social-media URL and Remix Icon helpers -->
+    <script src="js/social.js"></script>
+
+    <!-- Profile-specific JavaScript -->
+    <script src="js/profile.js"></script>
+
+</body>
+</html>
