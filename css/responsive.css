@@ -1,0 +1,375 @@
+/*
+============================================================
+SUPERIORS — RESPONSIVE LAYOUT
+============================================================
+*/
+
+/* =========================================================
+   20. LARGE TABLETS / SMALL LAPTOPS
+   ========================================================= */
+
+@media (max-width: 1050px) {
+    .students-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .profile-layout {
+        grid-template-columns: minmax(0, 1fr) minmax(300px, 420px);
+        gap: 36px;
+    }
+}
+
+/* =========================================================
+   21. TABLETS / MOBILE — NORMAL SCROLLING PROFILE IMAGE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    /*
+     * On tablets and phones, switch the profile layout to a
+     * single column.
+     *
+     * The image appears first, followed by the student's
+     * information.
+     */
+    .profile-layout {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    /*
+     * Put the image above the information on smaller screens.
+     */
+    .profile-image-column {
+        order: 1;
+    }
+
+    /*
+     * IMPORTANT:
+     *
+     * Desktop uses `position: fixed`, but mobile/tablet must
+     * NOT use fixed or sticky positioning.
+     *
+     * `position: relative` puts the image back into the normal
+     * document flow, meaning the user can scroll past it.
+     */
+    .profile-image-card {
+        position: relative;
+
+        /*
+         * Reset the desktop fixed-position values.
+         */
+        top: auto;
+        right: auto;
+
+        width: 100%;
+        max-height: none;
+
+        /*
+        * Allow the full image to determine the card's height.
+        * This prevents the card from cutting off the image.
+        */
+        height: auto;
+        overflow: hidden;
+
+        /*
+         * Keep the image visually above the information while
+         * still allowing it to scroll normally.
+         */
+        z-index: auto;
+        border-radius: 20px;
+    }
+
+    /*
+     * The student's information follows the image.
+     */
+    .profile-information {
+        order: 2;
+        padding-top: 0;
+    }
+
+   /*
+    * MOBILE PROFILE IMAGE
+    * ---------------------------------------------------------
+    * On smaller screens, show the COMPLETE student image.
+    *
+    * `height: auto` allows the image to keep its natural aspect
+    * ratio instead of forcing it into a fixed-height container.
+    *
+    * `object-fit: contain` provides an additional safeguard so
+    * the image itself is never cropped.
+    */
+    .profile-large-image {
+        width: 100%;
+        height: auto;
+
+        /*
+        * Preserve the original proportions of the image.
+        */
+        aspect-ratio: auto;
+
+        /*
+        * Never crop the student's image on mobile.
+        */
+        object-fit: contain;
+
+        /*
+        * Keep the image from becoming wider than its container.
+        */
+        max-width: 100%;
+    }
+
+    /*
+     * Footer switches to a two-column layout on tablets.
+     */
+    .footer-container {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
+        max-width: 620px;
+    }
+
+    .footer-nav,
+    .footer-creators {
+        padding-left: 0;
+        border-left: 0;
+    }
+}
+
+/* =========================================================
+   22. MOBILE / PHABLET
+   ========================================================= */
+
+@media (max-width: 700px) {
+    .header-container {
+        min-height: auto;
+        padding: 13px 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 11px;
+    }
+
+    .logo {
+        text-align: center;
+    }
+
+    .search-wrapper {
+        width: 100%;
+    }
+
+    .profile-header-container {
+        min-height: 64px;
+        padding: 10px 0;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .profile-header-container .logo {
+        text-align: right;
+    }
+
+    .back-button span {
+        display: none;
+    }
+
+    .back-button {
+        width: 42px;
+        padding: 0;
+    }
+
+    .students-section {
+        width: 92%;
+    }
+
+    .site-footer {
+        width: 92%;
+    }
+}
+
+/* =========================================================
+   23. PHABLETS
+   ========================================================= */
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .students-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* =========================================================
+   24. SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 480px) {
+    .students-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .student-card {
+        border-radius: 16px;
+    }
+
+    .student-image-container {
+        aspect-ratio: 1 / 1.15;
+    }
+
+    .profile-section {
+        width: 92%;
+    }
+
+    .profile-table-wrapper {
+        margin-top: 28px;
+    }
+
+    .profile-large-image {
+        height: clamp(260px, 48vh, 420px);
+    }
+
+    .profile-social-link {
+        flex: 1 1 calc(50% - 10px);
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 26px;
+        padding: 30px 22px 26px;
+    }
+
+    .footer-brand {
+        grid-column: auto;
+    }
+
+    .footer-nav,
+    .footer-creators {
+        padding-left: 0;
+        border-left: 0;
+        padding-top: 6px;
+    }
+
+    .creator-github-link {
+        min-height: 54px;
+    }
+}
+
+/* =========================================================
+   25. NARROW PHONES
+   ========================================================= */
+
+@media (max-width: 400px) {
+    .header-container,
+    .profile-section {
+        width: 94%;
+    }
+
+    .site-footer {
+        width: 94%;
+    }
+
+    .footer-copyright {
+        font-size: 0.78rem;
+    }
+
+    .profile-name {
+        letter-spacing: -0.8px;
+    }
+}
+
+@media (max-width: 340px) {
+    .profile-social-link {
+        flex: 1 1 100%;
+    }
+
+    .profile-table th {
+        width: 38%;
+        padding: 10px 8px;
+    }
+
+    .profile-table td {
+        padding: 10px 8px;
+    }
+
+    .student-info {
+        padding: 12px 12px 2px;
+    }
+
+    .student-contact-info {
+        padding: 0 12px 12px;
+    }
+
+    .student-image-overlay {
+        padding: 50px 14px 14px;
+    }
+}
+
+/* =========================================================
+   26. REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .student-card:hover,
+    .social-link:hover,
+    .profile-social-link:hover,
+    .profile-home-button:hover,
+    .back-button:hover,
+    .creator-github-link:hover {
+        transform: none !important;
+    }
+}
+
+/* =========================================================
+   31. DESKTOP REFERENCE OVERRIDES
+   ========================================================= */
+
+@media (min-width: 1051px) {
+    /* Keep the four-card desktop composition stable on large screens. */
+    .students-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    /* Preserve the side-by-side creator buttons on desktop. */
+    .creator-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* =========================================================
+   32. TABLET FOOTER CREATOR LAYOUT
+   ========================================================= */
+
+@media (min-width: 481px) and (max-width: 900px) {
+    .creator-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* =========================================================
+   33. MOBILE FOOTER CREATOR LAYOUT
+   ========================================================= */
+
+@media (max-width: 480px) {
+    /*
+       On narrow phones the two links stack again so the GitHub
+       handles remain readable instead of being squeezed.
+    */
+    .creator-list {
+        grid-template-columns: 1fr;
+    }
+
+    .creator-github-link {
+        width: 100%;
+    }
+}
