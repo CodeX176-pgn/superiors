@@ -1,0 +1,109 @@
+/* ============================================================
+   SUPERIORS — INTRO RESPONSIVE
+   ------------------------------------------------------------
+   Responsible only for responsive adjustments to the intro.
+
+   The main website's responsive.css remains separate.
+   ============================================================ */
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+    /*
+     * Reduce the content padding on narrow screens.
+     */
+    .intro-content {
+
+        padding:
+            1.25rem;
+    }
+
+
+    /*
+     * Make the emblem smaller on phones.
+     */
+    .intro-emblem {
+
+        width:
+            clamp(75px, 24vw, 110px);
+    }
+
+
+    /*
+     * Bring "Meet" slightly closer to the emblem.
+     */
+    .intro-meet {
+
+        margin-top:
+            0.7rem;
+    }
+
+
+    /*
+     * Prevent the title from touching the viewport edges.
+     */
+    .intro-title {
+
+        max-width:
+            95vw;
+
+        /*
+         * Reduce spacing slightly on narrow displays.
+         */
+        letter-spacing:
+            0.025em;
+    }
+
+
+    /*
+     * Slightly reduce the diagonal shadow on small screens.
+     *
+     * This helps avoid excessive visual darkness.
+     */
+    .intro-panel--purple {
+
+        filter:
+            drop-shadow(
+                8px 12px 10px rgba(0, 0, 0, 0.68)
+            );
+    }
+}
+
+
+/* ============================================================
+   VERY SMALL PHONES
+   ============================================================ */
+
+@media (max-width: 380px) {
+
+    /*
+     * Further reduce title size on very narrow displays.
+     */
+    .intro-title {
+
+        font-size:
+            clamp(1.9rem, 10vw, 2.6rem);
+    }
+
+
+    /*
+     * Keep the decorative lines compact.
+     */
+    .intro-decoration {
+
+        gap:
+            0.5rem;
+    }
+
+
+    .intro-decoration::before,
+    .intro-decoration::after {
+
+        width:
+            28px;
+    }
+}

@@ -1,0 +1,126 @@
+/* ============================================================
+   SUPERIORS — INTRO ROOT
+   ------------------------------------------------------------
+   Responsible for:
+   - Full-screen intro container
+   - Intro stacking order
+   - Overflow protection
+   - Body scroll locking
+   - Final intro removal state
+
+   This file does NOT contain visual details for the panels,
+   title, emblem, or animations. Those responsibilities belong
+   to the other intro stylesheets.
+   ============================================================ */
+
+
+/* ============================================================
+   INTRO ROOT CONTAINER
+   ============================================================ */
+
+.superiors-intro {
+
+    /*
+     * Keep the intro fixed to the viewport rather than the page.
+     *
+     * This ensures the intro always covers the entire screen,
+     * regardless of the page's scroll position.
+     */
+    position: fixed;
+
+    /*
+     * Stretch the element to all four edges of the viewport.
+     */
+    inset: 0;
+
+    /*
+     * Extremely high stacking order guarantees that the intro
+     * appears above the header, cards, footer, and other content.
+     */
+    z-index: 99999;
+
+    /*
+     * Prevent oversized diagonal panels from creating scrollbars.
+     */
+    overflow: hidden;
+
+    /*
+     * Dark fallback color displayed before the gradient panels
+     * have finished painting.
+     */
+    background: #08060d;
+
+    /*
+     * The intro should be fully opaque when first displayed.
+     */
+    opacity: 1;
+
+    /*
+     * GPU compositing can make the panel movement smoother.
+     */
+    transform: translateZ(0);
+
+    /*
+     * The intro itself doesn't need pointer interaction.
+     *
+     * It is changed to pointer-events: none when the animation
+     * has completed.
+     */
+    pointer-events: auto;
+
+    /*
+     * Prevent accidental text selection while the intro is
+     * animating.
+     */
+    user-select: none;
+
+    /*
+     * Improve rendering consistency.
+     */
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+
+/* ============================================================
+   BODY SCROLL LOCK
+   ============================================================ */
+
+/*
+ * JavaScript adds this class while the intro is visible.
+ *
+ * This prevents users from scrolling the homepage behind the
+ * cinematic opening.
+ */
+body.intro-active {
+    overflow: hidden;
+}
+
+
+/* ============================================================
+   FINAL INTRO STATE
+   ============================================================ */
+
+/*
+ * JavaScript applies this class immediately before removing the
+ * intro from the DOM.
+ */
+.superiors-intro.intro-finished {
+
+    /*
+     * Fade away any remaining pixels.
+     */
+    opacity: 0;
+
+    /*
+     * The intro must no longer block interaction with the
+     * homepage.
+     */
+    pointer-events: none;
+
+    /*
+     * Very short final fade.
+     */
+    transition:
+        opacity 0.25s ease;
+}

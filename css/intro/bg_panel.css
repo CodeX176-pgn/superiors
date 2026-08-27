@@ -1,0 +1,173 @@
+/* ============================================================
+   SUPERIORS — INTRO BACKGROUND PANELS
+   ------------------------------------------------------------
+   Responsible for:
+   - Gold background panel
+   - Purple foreground panel
+   - Diagonal split
+   - Panel layering
+   - Panel movement during the reveal
+
+   The purple panel intentionally sits above the gold panel.
+   ============================================================ */
+
+
+/* ============================================================
+   COMMON PANEL CONFIGURATION
+   ============================================================ */
+
+.intro-panel {
+
+    /*
+     * Both panels occupy exactly the same viewport area.
+     */
+    position: absolute;
+    inset: 0;
+
+    /*
+     * Prevent panel layers from responding to mouse input.
+     */
+    pointer-events: none;
+
+    /*
+     * Prepare the panels for GPU-accelerated movement.
+     */
+    will-change: transform;
+}
+
+
+/* ============================================================
+   GOLD PANEL
+   ============================================================ */
+
+.intro-panel--gold {
+
+    /*
+     * Gold occupies the lower-right diagonal half.
+     *
+     * The diagonal boundary runs from the top-right corner
+     * toward the bottom-left corner.
+     */
+    clip-path: polygon(
+        100% 0,
+        100% 100%,
+        0 100%
+    );
+
+    /*
+     * Layer 1 = background.
+     */
+    z-index: 1;
+
+    /*
+     * Premium gold gradient.
+     *
+     * Several gradients are layered together to prevent the
+     * gold from looking completely flat.
+     */
+    background:
+        radial-gradient(
+            circle at 75% 70%,
+            rgba(255, 215, 100, 0.32),
+            transparent 32%
+        ),
+        linear-gradient(
+            135deg,
+            #8a5a00 0%,
+            #c58a16 35%,
+            #e0ad35 55%,
+            #9a6809 100%
+        );
+
+    /*
+     * Initial position.
+     */
+    transform: translate3d(0, 0, 0);
+}
+
+
+/* ============================================================
+   PURPLE PANEL
+   ============================================================ */
+
+.intro-panel--purple {
+
+    /*
+     * Purple occupies the upper-left diagonal half.
+     */
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        0 100%
+    );
+
+    /*
+     * Layer 2 means purple is physically above gold.
+     */
+    z-index: 2;
+
+    /*
+     * Deep royal purple background.
+     */
+    background:
+        radial-gradient(
+            circle at 25% 25%,
+            rgba(181, 91, 255, 0.35),
+            transparent 34%
+        ),
+        radial-gradient(
+            circle at 70% 10%,
+            rgba(125, 48, 255, 0.22),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #17052e 0%,
+            #35105d 45%,
+            #5516a1 100%
+        );
+
+    /*
+     * This is deliberately a drop-shadow rather than box-shadow.
+     *
+     * drop-shadow follows the clipped polygon, allowing the
+     * shadow to appear directly underneath the diagonal edge.
+     *
+     * This creates the "purple sitting above gold" effect.
+     */
+    filter:
+        drop-shadow(
+            12px 16px 13px rgba(0, 0, 0, 0.72)
+        );
+
+    /*
+     * Initial position.
+     */
+    transform: translate3d(0, 0, 0);
+}
+
+
+/* ============================================================
+   REVEAL MOVEMENT
+   ============================================================ */
+
+/*
+ * Purple travels toward the upper-left corner.
+ */
+.superiors-intro.intro-opening
+.intro-panel--purple {
+
+    transform:
+        translate3d(-115%, -115%, 0);
+}
+
+
+/*
+ * Gold travels toward the lower-right corner.
+ */
+.superiors-intro.intro-opening
+.intro-panel--gold {
+
+    transform:
+        translate3d(115%, 115%, 0);
+}

@@ -1,0 +1,70 @@
+/* ============================================================
+   SUPERIORS — INTRO ATMOSPHERIC PARTICLES
+   ------------------------------------------------------------
+   Responsible for the very subtle texture/particle effect
+   visible across the purple and gold panels.
+
+   These are CSS-generated particles rather than individual DOM
+   elements, which keeps the intro lightweight.
+   ============================================================ */
+
+
+/* ============================================================
+   PARTICLE TEXTURE
+   ============================================================ */
+
+.intro-panel--purple::before,
+.intro-panel--gold::before {
+
+    /*
+     * Generate the decorative layer.
+     */
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    /*
+     * Decorative only.
+     */
+    pointer-events: none;
+
+    /*
+     * Keep the particles subtle.
+     */
+    opacity: 0.28;
+
+    /*
+     * Three sets of tiny points are layered together.
+     *
+     * Different background sizes prevent the pattern from
+     * looking repetitive.
+     */
+    background-image:
+
+        radial-gradient(
+            circle at 20% 30%,
+            rgba(255, 255, 255, 0.13) 0 1px,
+            transparent 1.5px
+        ),
+
+        radial-gradient(
+            circle at 75% 65%,
+            rgba(255, 255, 255, 0.09) 0 1px,
+            transparent 1.5px
+        ),
+
+        radial-gradient(
+            circle at 45% 80%,
+            rgba(255, 255, 255, 0.08) 0 1px,
+            transparent 1.5px
+        );
+
+    /*
+     * Different scales create a more natural distribution.
+     */
+    background-size:
+        90px 90px,
+        130px 130px,
+        170px 170px;
+}

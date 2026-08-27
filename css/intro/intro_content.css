@@ -1,0 +1,194 @@
+/* ============================================================
+   SUPERIORS — INTRO CONTENT
+   ------------------------------------------------------------
+   Responsible for:
+   - Intro content container
+   - Content positioning
+   - "Meet"
+   - Decorative line/diamond
+   - Content fade during the reveal
+
+   The emblem and main title have their own dedicated files.
+   ============================================================ */
+
+
+/* ============================================================
+   CONTENT CONTAINER
+   ============================================================ */
+
+.intro-content {
+
+    /*
+     * Cover the entire intro.
+     */
+    position: absolute;
+    inset: 0;
+
+    /*
+     * Layer above both background panels.
+     */
+    z-index: 5;
+
+    /*
+     * Center all intro content.
+     */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    /*
+     * Prevent content from touching the viewport edges.
+     */
+    padding: 2rem;
+
+    /*
+     * Center-align the branding.
+     */
+    text-align: center;
+
+    /*
+     * Initial visible state.
+     */
+    opacity: 1;
+
+    transform: translateY(0);
+
+    /*
+     * Used when the panels begin opening.
+     */
+    transition:
+        opacity 0.55s ease,
+        transform 0.55s ease;
+
+    /*
+     * The intro content is decorative.
+     */
+    pointer-events: none;
+}
+
+
+/* ============================================================
+   "MEET" TEXT
+   ============================================================ */
+
+.intro-meet {
+
+    margin-top: 1rem;
+    margin-bottom: 0.15rem;
+
+    /*
+     * Elegant script-like typography.
+     *
+     * These are fallback fonts so the text remains usable even
+     * when the preferred font isn't installed.
+     */
+    font-family:
+        "Segoe Script",
+        "Brush Script MT",
+        cursive;
+
+    font-size:
+        clamp(1.7rem, 4vw, 3.4rem);
+
+    font-weight: 500;
+
+    letter-spacing: 0.04em;
+
+    color: #ffffff;
+
+    /*
+     * Purple glow surrounding the word.
+     */
+    text-shadow:
+        0 0 8px rgba(194, 126, 255, 0.8),
+        0 0 22px rgba(128, 48, 255, 0.55);
+}
+
+
+/* ============================================================
+   DECORATIVE ELEMENT
+   ============================================================ */
+
+.intro-decoration {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 0.75rem;
+
+    margin-top: 1.25rem;
+}
+
+
+/*
+ * Left and right decorative lines.
+ */
+.intro-decoration::before,
+.intro-decoration::after {
+
+    content: "";
+
+    width:
+        clamp(35px, 7vw, 100px);
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 207, 74, 0.9)
+        );
+}
+
+
+/*
+ * Mirror the second line so both lines point toward the center.
+ */
+.intro-decoration::after {
+
+    transform: rotate(180deg);
+}
+
+
+/*
+ * Center diamond.
+ */
+.intro-decoration span {
+
+    width: 7px;
+    height: 7px;
+
+    background: #f4c542;
+
+    transform: rotate(45deg);
+
+    box-shadow:
+        0 0 8px rgba(255, 202, 65, 0.7);
+}
+
+
+/* ============================================================
+   CONTENT EXIT
+   ============================================================ */
+
+/*
+ * When the diagonal reveal starts, the text fades away slightly
+ * before the panels completely leave the viewport.
+ */
+.superiors-intro.intro-opening
+.intro-content {
+
+    opacity: 0;
+
+    transform:
+        scale(0.96);
+
+    transition:
+        opacity 0.42s ease,
+        transform 0.42s ease;
+}

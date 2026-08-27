@@ -1,0 +1,101 @@
+/* ============================================================
+   SUPERIORS — INTRO TITLE
+   ------------------------------------------------------------
+   Responsible for:
+   - THE SUPERIORS typography
+   - Gradient text
+   - Text depth
+   - Glow
+   ============================================================ */
+
+
+/* ============================================================
+   MAIN INTRO TITLE
+   ============================================================ */
+
+.intro-title {
+
+    /*
+     * Remove browser-default heading spacing.
+     */
+    margin: 0;
+
+    /*
+     * Strong, modern typography.
+     */
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    /*
+     * Responsive title size.
+     */
+    font-size:
+        clamp(2.3rem, 6vw, 5.5rem);
+
+    /*
+     * Strong visual weight.
+     */
+    font-weight: 900;
+
+    /*
+     * Slight letter spacing creates a premium title feel.
+     */
+    letter-spacing:
+        clamp(0.03em, 0.15vw, 0.12em);
+
+    /*
+     * Keep the title compact vertically.
+     */
+    line-height: 0.95;
+
+    /*
+     * Always uppercase.
+     */
+    text-transform: uppercase;
+
+    /*
+     * Gold-to-white metallic gradient.
+     */
+    background:
+        linear-gradient(
+            180deg,
+            #fff9e5 0%,
+            #ffffff 38%,
+            #f0c34c 70%,
+            #b8780c 100%
+        );
+
+    /*
+     * Clip the gradient to the actual letters.
+     */
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    /*
+     * Make the original text transparent so the gradient is
+     * visible.
+     */
+    color: transparent;
+
+    /*
+     * Add depth and subtle gold illumination.
+     */
+    filter:
+        drop-shadow(
+            0 8px 4px rgba(0, 0, 0, 0.55)
+        )
+        drop-shadow(
+            0 0 15px rgba(255, 195, 60, 0.25)
+        );
+
+    /*
+     * Initial animation state.
+     */
+    opacity: 0;
+
+    transform:
+        translateY(25px)
+        scale(0.94);
+}

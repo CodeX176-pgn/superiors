@@ -1,0 +1,53 @@
+/* ============================================================
+   SUPERIORS — INTRO EMBLEM
+   ------------------------------------------------------------
+   Responsible for the SUPERIORS emblem displayed above the
+   opening title.
+   ============================================================ */
+
+
+/* ============================================================
+   EMBLEM
+   ============================================================ */
+
+.intro-emblem {
+
+    /*
+     * Responsive emblem sizing.
+     *
+     * Minimum: 90px
+     * Preferred: 13vw
+     * Maximum: 155px
+     */
+    width:
+        clamp(90px, 13vw, 155px);
+
+    height: auto;
+
+    /*
+     * Preserve the original emblem proportions.
+     */
+    object-fit: contain;
+
+    /*
+     * Premium purple/gold glow.
+     */
+    filter:
+        drop-shadow(
+            0 0 12px rgba(194, 126, 255, 0.55)
+        )
+        drop-shadow(
+            0 8px 16px rgba(0, 0, 0, 0.55)
+        );
+
+    /*
+     * Initial state for the entrance animation.
+     *
+     * animations.css will control the actual animation.
+     */
+    opacity: 0;
+
+    transform:
+        translateY(-25px)
+        scale(0.88);
+}

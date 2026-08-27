@@ -1,0 +1,238 @@
+/* ============================================================
+   SUPERIORS — INTRO ANIMATIONS
+   ------------------------------------------------------------
+   Responsible for:
+   - Emblem entrance
+   - "Meet" entrance
+   - Main title entrance
+   - Decorative element entrance
+   - Diagonal panel transitions
+
+   Visual appearance remains in the other intro stylesheets.
+   ============================================================ */
+
+
+/* ============================================================
+   PANEL TRANSITIONS
+   ============================================================ */
+
+.intro-panel--purple,
+.intro-panel--gold {
+
+    /*
+     * Smooth cinematic movement.
+     *
+     * cubic-bezier creates a fast initial movement followed by
+     * a smooth deceleration.
+     */
+    transition:
+        transform 1.35s
+        cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+
+/* ============================================================
+   EMBLEM ENTRANCE
+   ============================================================ */
+
+.intro-emblem {
+
+    animation:
+        intro-emblem-in
+        0.85s
+        cubic-bezier(0.2, 0.8, 0.2, 1)
+        0.15s
+        forwards;
+}
+
+
+/* ============================================================
+   "MEET" ENTRANCE
+   ============================================================ */
+
+.intro-meet {
+
+    /*
+     * The delay ensures the emblem appears first.
+     */
+    opacity: 0;
+
+    transform:
+        translateY(20px);
+
+    animation:
+        intro-text-in
+        0.75s
+        cubic-bezier(0.2, 0.8, 0.2, 1)
+        0.55s
+        forwards;
+}
+
+
+/* ============================================================
+   MAIN TITLE ENTRANCE
+   ============================================================ */
+
+.intro-title {
+
+    /*
+     * The main title follows "Meet".
+     */
+    animation:
+        intro-title-in
+        0.85s
+        cubic-bezier(0.2, 0.8, 0.2, 1)
+        0.75s
+        forwards;
+}
+
+
+/* ============================================================
+   DECORATIVE ELEMENT ENTRANCE
+   ============================================================ */
+
+.intro-decoration {
+
+    opacity: 0;
+
+    animation:
+        intro-decoration-in
+        0.65s
+        ease
+        1.15s
+        forwards;
+}
+
+
+/* ============================================================
+   KEYFRAMES — EMBLEM
+   ============================================================ */
+
+@keyframes intro-emblem-in {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(-25px)
+            scale(0.88);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+/* ============================================================
+   KEYFRAMES — TEXT
+   ============================================================ */
+
+@keyframes intro-text-in {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(20px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* ============================================================
+   KEYFRAMES — MAIN TITLE
+   ============================================================ */
+
+@keyframes intro-title-in {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(25px)
+            scale(0.94);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+/* ============================================================
+   KEYFRAMES — DECORATION
+   ============================================================ */
+
+@keyframes intro-decoration-in {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            scaleX(0.5);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            scaleX(1);
+    }
+}
+
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+/*
+ * Respect the user's operating-system accessibility preference.
+ *
+ * The branding remains visible, but unnecessary entrance
+ * animations are disabled.
+ */
+@media (prefers-reduced-motion: reduce) {
+
+    .intro-panel--purple,
+    .intro-panel--gold,
+    .intro-content {
+
+        transition: none !important;
+    }
+
+
+    .intro-emblem,
+    .intro-meet,
+    .intro-title,
+    .intro-decoration {
+
+        animation: none !important;
+
+        opacity: 1;
+
+        transform: none;
+    }
+}

@@ -1,0 +1,42 @@
+/* ============================================================
+   SUPERIORS — INTRO EDGE HIGHLIGHT
+   ------------------------------------------------------------
+   Responsible for the subtle illuminated edge between the
+   purple foreground panel and the gold background panel.
+   ============================================================ */
+
+
+/* ============================================================
+   PURPLE DIAGONAL EDGE
+   ============================================================ */
+
+.intro-panel--purple::after {
+
+    /*
+     * Pseudo-element allows the highlight to remain attached to
+     * the purple panel.
+     */
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    /*
+     * Very thin diagonal highlight.
+     *
+     * The highlight is deliberately subtle so that the shadow
+     * remains the dominant depth cue.
+     */
+    background:
+        linear-gradient(
+            135deg,
+            transparent 49.7%,
+            rgba(255, 255, 255, 0.10) 50%,
+            transparent 50.3%
+        );
+
+    /*
+     * Decorative only.
+     */
+    pointer-events: none;
+}
