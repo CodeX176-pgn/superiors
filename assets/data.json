@@ -1,0 +1,121 @@
+{
+    "students": [
+        {
+            "name": "Eseni Felix",
+            "nickname": "Vibez",
+            "title": "Most Corrupt",
+            "phone": "+234 807 560 2343",
+
+            "socialMedia": {
+                "tiktok": "flix35772"
+            },
+
+            "stateOfOrigin": "Ebonyi",
+            "hobbies": [
+                "Gaming",
+                "Viewing Tiktok Videos",
+                "Watching Anime & Netflix Movies"
+            ],
+
+            "favoriteGame": "Ghost of Tsushima",
+
+            "image": "assets/images/students/eseni-main.jpeg",
+            "hoverImage": "assets/images/students/eseni-hover.jpeg"
+        },
+
+        {
+            "name": "Ndoh Cyril",
+            "nickname": "CodeX",
+            "title": "The Human Calc",
+
+            "phone": "+234 810 020 9048",
+
+            "socialMedia": {
+                "github": "CodeX176-pgn",
+                "tiktok": "da_pgene29",
+                "youtube": "ndohkamsiyochukwu"
+            },
+            "stateOfOrigin": "Imo",
+            "hobbies": [
+                "Vibe Coding",
+                "Gaming",
+                "Watching Anime"
+            ],
+            "email": "codespace176@gmail.com",
+
+            "favoriteAnime": "Jujutsu Kaisen",
+            "favoriteMusic": "'Ready' by Madara Dusal",
+            "favoriteGame": "Free Fire",
+            "favoriteColor": "Black",
+            "bestSubject": "Mathematics",
+
+
+            "image": "assets/images/students/yuji-main.png",
+            "hoverImage": "assets/images/students/yuji-hover.png"
+        },
+
+        {
+            "name": "Nwaigwe Chidiebube",
+            "nickname": "Deyon Jnr",
+            "title": "Best Basketballer",
+            "phone": "+234 903 543 2368",
+
+            "stateOfOrigin": "Imo",
+            "hobbies": [
+                "Watching Movie",
+                "Playing Any Interesting Sports"
+            ],
+            
+            "favoriteGame": "Call Of Duty: Mobile",
+            "favoriteMovie": "Prison Break",
+            "bestSubject": "Religious and Moral Education",
+            
+            "image": "assets/images/students/nwaigwe.jpeg",
+            "hoverImage": "assets/images/students/nwaigwe.jpeg"
+        },
+
+        {
+            "name": "Okoro David",
+            "nickname": "Silent X",
+            "title": "--",
+            "phone": "+234 703 582 6717",
+
+            "socialMedia": {
+                "tiktok": "k1ngs_3dits"
+            },
+
+            "stateOfOrigin": "Imo (but born in South Africa)",
+            "hobbies": [
+                "Playing Video Games",
+                "Rizz",
+                "Playing Football",
+                "Watching Movies & Anime"
+            ],
+
+            "favoriteAnime": "Jujutsu Kaisen",
+            "favoriteMusic": "Ransom",
+
+            "image": "assets/images/students/okoro-main.jpeg",
+            "hoverImage": "assets/images/students/okoro-hover.jpeg"
+        },
+
+        {
+            "name": "Umez Elvis",
+            "nickname": "Above The Law",
+            "title": "--",
+            "phone": "+234 816 899 0212",
+
+            "stateOfOrigin": "Imo",
+            "hobbies": [
+                "Singing",
+                "Reading",
+                "Playing Video Games",
+                "Playing FootBall",
+                "Acting"
+            ],
+
+            "favoriteSport": "Football"
+        }
+
+    ]
+}
