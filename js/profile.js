@@ -795,47 +795,58 @@
         });
 
     /* ------------------------------------------------------------
-       BACK BUTTON
-       ------------------------------------------------------------ */
+        BACK BUTTON
+    ------------------------------------------------------------ */
 
+    /**
+     * Handles the profile-page back button.
+     *
+     * IMPORTANT:
+     * The skip-intro flag is set BEFORE history.back().
+     *
+     * This guarantees that returning to index.html through the
+     * browser history does not replay the cinematic intro.
+     */
     if (backButton) {
-        backButton.addEventListener(
-            "click",
-            () => {
+        backButton.addEventListener("click", () => {
+
+            /* --------------------------------------------------------
+            Tell intro.js that the next homepage visit should
+            skip the cinematic opening scene.
+            -------------------------------------------------------- */
+            sessionStorage.setItem(
+                "superiorsSkipIntro",
+                "true"
+            );
+
+            /* --------------------------------------------------------
+            Check whether the user came from another page on the
+            same website and whether browser history is available.
+            -------------------------------------------------------- */
+            const referrer = document.referrer;
+
+            const sameOriginReferrer =
+                referrer &&
+                referrer.startsWith(window.location.origin);
+
+            if (
+                sameOriginReferrer &&
+                window.history.length > 1
+            ) {
                 /*
-                 * IMPORTANT:
-                 * Set the flag BEFORE history.back().
-                 *
-                 * The previous version only set the flag when
-                 * history.back() could not be used.
-                 */
-                skipHomeIntro();
-
-                const referrer =
-                    document.referrer;
-
-                const sameOriginReferrer =
-                    referrer &&
-                    referrer.startsWith(
-                        window.location.origin
-                    );
-
-                if (
-                    sameOriginReferrer &&
-                    window.history.length > 1
-                ) {
-                    window.history.back();
-                    return;
-                }
-
-                /*
-                 * Fallback when browser history cannot safely
-                 * return to the previous page.
-                 */
-                window.location.href =
-                    "index.html";
+                * Return to the previous page without loading
+                * index.html manually.
+                */
+                window.history.back();
+                return;
             }
-        );
+
+            /* --------------------------------------------------------
+            If there is no useful browser history, fall back to
+            the homepage directly.
+            -------------------------------------------------------- */
+            window.location.href = "index.html";
+        });
     }
 
     /* ============================================================
