@@ -50,7 +50,7 @@
      * - Cannot be loaded
      */
     const DEFAULT_STUDENT_IMAGE =
-        "../../assets/images/students/no_profile.png";
+        "assets/images/students/no_profile.png";
 
 
     /* ========================================================
