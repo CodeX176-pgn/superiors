@@ -1,6 +1,31 @@
 {
     "students": [
         {
+            "name": "Chiuwa Elvis",
+            "nickname": "Supreme",
+            "title": "--",
+
+            "socialMedia": {
+                "tiktok": "jxt_supreme",
+                "youtube": "drac_tv"
+            },
+
+            "stateOfOrigin": "Imo",
+            "hobbies": [
+                "Playing Games",
+                "Watching Anime",
+                "Playing Football"
+            ],
+
+            "favoriteGame": "Free Fire",
+            "favouriteAnime": "Bluelock",
+            "favouriteMusic": "Montagem Gritos Talento 3",
+
+            "image": "assets/images/students/chiuwa-main.jpeg",
+            "hoverImage": "assets/images/students/chiuwa-hover.jpeg"
+        },
+
+        {
             "name": "Eseni Felix",
             "nickname": "Vibez",
             "title": "Most Corrupt",
