@@ -27,6 +27,23 @@
         },
 
         {
+            "name": "Chukwuma Somto",
+            "nickname": "Chuks",
+            "phone": "+234 916 848 5068",
+            "stateOfOrrigin": "Anambra",
+
+            "socialMedia": {
+                "tiktok": "dagger12356"
+            },
+
+            "hobbies": [
+                "Playing Football"
+            ],
+
+            "favouriteGame": "Dream League Soccer"
+        },
+
+        {
             "name": "Eseni Felix",
             "nickname": "Vibez",
             "title": "Most Corrupt",
