@@ -204,8 +204,11 @@
     /**
      * Create one safe value cell for a social-media account.
      *
-     * The URL is deliberately built from `username`, while the text
-     * displayed in the table comes from `displayName`.
+     * The information table intentionally displays only the student's
+     * `displayName` as plain text. The social-media button elsewhere on
+     * the profile is responsible for opening the account URL using the
+     * `username`. Keeping these responsibilities separate prevents the
+     * table value from behaving like an external link.
      *
      * @param {string} platform - Social platform name.
      * @param {string} username - Account username/handle.
@@ -213,37 +216,19 @@
      * @returns {string} Generated table-cell HTML.
      */
     function createSocialValueCell(platform, username, displayName) {
+        // The table must show the platform display name, not the username.
         const displayValue = String(displayName || "").trim();
 
-        // The table should show the platform display name, not the username.
         if (!displayValue) {
             return "";
         }
 
-        // The external account URL must always be built from the username.
-        const url = getSocialUrl(platform, username);
-
-        if (!url) {
-            return `
-                <td>
-                    ${escapeHTML(displayValue)}
-                </td>
-            `;
-        }
-
+        // Do not create an <a> element here. The information table is
+        // informational only; account navigation is handled by the
+        // dedicated social-media button section below.
         return `
             <td>
-                <a
-                    class="profile-value-link"
-                    href="${escapeHTML(url)}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Open ${escapeHTML(
-                        getFieldLabel(platform)
-                    )} profile for ${escapeHTML(displayValue)}"
-                >
-                    ${escapeHTML(displayValue)}
-                </a>
+                ${escapeHTML(displayValue)}
             </td>
         `;
     }
