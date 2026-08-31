@@ -202,22 +202,26 @@
     }
 
     /**
-     * Create one safe value cell for the information table.
+     * Create one safe value cell for a social-media account.
+     *
+     * The URL is deliberately built from `username`, while the text
+     * displayed in the table comes from `displayName`.
      *
      * @param {string} platform - Social platform name.
-     * @param {*} value - Social username or URL.
+     * @param {string} username - Account username/handle.
+     * @param {string} displayName - Name shown by the student on the platform.
      * @returns {string} Generated table-cell HTML.
      */
-    function createSocialValueCell(platform, value) {
-        const displayValue =
-            formatProfileValue(value);
+    function createSocialValueCell(platform, username, displayName) {
+        const displayValue = String(displayName || "").trim();
 
-        const url =
-            getSocialUrl(platform, value);
-
+        // The table should show the platform display name, not the username.
         if (!displayValue) {
             return "";
         }
+
+        // The external account URL must always be built from the username.
+        const url = getSocialUrl(platform, username);
 
         if (!url) {
             return `
@@ -236,7 +240,7 @@
                     rel="noopener noreferrer"
                     aria-label="Open ${escapeHTML(
                         getFieldLabel(platform)
-                    )} profile"
+                    )} profile for ${escapeHTML(displayValue)}"
                 >
                     ${escapeHTML(displayValue)}
                 </a>
@@ -308,35 +312,28 @@
     /**
      * Create one social-media button.
      *
+     * The button opens the account using `username`. The student's
+     * platform display name is intentionally not used to build the URL.
+     *
      * @param {string} platform - Social platform name.
-     * @param {*} username - Username or complete URL.
+     * @param {string} username - Account username/handle.
+     * @param {string} displayName - Name shown by the student on the platform.
      * @returns {string} Social link HTML.
      */
-    function createProfileSocialLink(
-        platform,
-        username
-    ) {
-        if (
-            isMissingSocialValue(username)
-        ) {
+    function createProfileSocialLink(platform, username, displayName) {
+        if (isMissingSocialValue(username)) {
             return "";
         }
 
-        const url =
-            getSocialUrl(
-                platform,
-                username
-            );
+        const url = getSocialUrl(platform, username);
 
         if (!url) {
             return "";
         }
 
-        const iconName =
-            getSocialIconName(platform);
-
-        const readablePlatform =
-            getFieldLabel(platform);
+        const iconName = getSocialIconName(platform);
+        const readablePlatform = getFieldLabel(platform);
+        const accessibleName = String(displayName || username).trim();
 
         return `
             <a
@@ -346,10 +343,10 @@
                 rel="noopener noreferrer"
                 aria-label="${escapeHTML(
                     readablePlatform
-                )} profile"
+                )} profile for ${escapeHTML(accessibleName)}"
                 title="${escapeHTML(
                     readablePlatform
-                )} profile"
+                )} profile for ${escapeHTML(accessibleName)}"
             >
                 <i
                     class="${escapeHTML(iconName)}"
@@ -426,43 +423,45 @@
            SOCIAL MEDIA
            -------------------------------------------------------- */
 
-        const socialMedia =
-            student.socialMedia &&
-            typeof student.socialMedia === "object"
-                ? student.socialMedia
-                : {};
+        const socialMedia = Array.isArray(student.socialMedia)
+            ? student.socialMedia
+            : [];
 
-        Object.entries(socialMedia).forEach(
-            ([platform, value]) => {
-                if (
-                    isMissingSocialValue(value)
-                ) {
-                    return;
-                }
-
-                const label =
-                    getFieldLabel(platform);
-
-                const valueCell =
-                    createSocialValueCell(
-                        platform,
-                        value
-                    );
-
-                if (!valueCell) {
-                    return;
-                }
-
-                rows.push(`
-                    <tr>
-                        <th scope="row">
-                            ${escapeHTML(label)}
-                        </th>
-                        ${valueCell}
-                    </tr>
-                `);
+        socialMedia.forEach((social) => {
+            // Ignore malformed social-media records.
+            if (!social || typeof social !== "object") {
+                return;
             }
-        );
+
+            const platform = String(social.platform || "").trim();
+            const username = String(social.username || "").trim();
+            const displayName = String(social.displayName || "").trim();
+
+            if (!platform || isMissingSocialValue(username) || !displayName) {
+                return;
+            }
+
+            const label = getFieldLabel(platform);
+
+            const valueCell = createSocialValueCell(
+                platform,
+                username,
+                displayName
+            );
+
+            if (!valueCell) {
+                return;
+            }
+
+            rows.push(`
+                <tr>
+                    <th scope="row">
+                        ${escapeHTML(label)}
+                    </th>
+                    ${valueCell}
+                </tr>
+            `);
+        });
 
         /* --------------------------------------------------------
            ALL OTHER POPULATED DATA.JS FIELDS
@@ -614,32 +613,35 @@
            SOCIAL MEDIA BUTTONS
            -------------------------------------------------------- */
 
-        const socialMedia =
-            student.socialMedia || {};
+        const socialMedia = Array.isArray(student.socialMedia)
+            ? student.socialMedia
+            : [];
 
         if (profileSocials) {
-            profileSocials.innerHTML =
-                Object.entries(socialMedia)
-                    .filter(
-                        ([, username]) =>
-                            !isMissingSocialValue(
-                                username
-                            )
+            profileSocials.innerHTML = socialMedia
+                .filter((social) => {
+                    // Only render well-formed entries that have a usable
+                    // platform and username.
+                    return (
+                        social &&
+                        typeof social === "object" &&
+                        String(social.platform || "").trim() &&
+                        !isMissingSocialValue(social.username)
+                    );
+                })
+                .map((social) =>
+                    createProfileSocialLink(
+                        String(social.platform).trim(),
+                        String(social.username).trim(),
+                        String(social.displayName || "").trim()
                     )
-                    .map(
-                        ([platform, username]) =>
-                            createProfileSocialLink(
-                                platform,
-                                username
-                            )
-                    )
-                    .join("");
+                )
+                .join("");
 
             const hasSocialLinks =
                 profileSocials.children.length > 0;
 
-            profileSocials.hidden =
-                !hasSocialLinks;
+            profileSocials.hidden = !hasSocialLinks;
 
             const socialSection =
                 profileSocials.closest(
@@ -647,8 +649,7 @@
                 );
 
             if (socialSection) {
-                socialSection.hidden =
-                    !hasSocialLinks;
+                socialSection.hidden = !hasSocialLinks;
             }
         }
 

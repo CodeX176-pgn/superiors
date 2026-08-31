@@ -287,37 +287,48 @@ The student's best or favorite school subject.
 
 # Social Media
 
-Social-media accounts are stored inside the `socialMedia` object.
+Social-media accounts are stored inside the `socialMedia` array.
+
+Each entry identifies a platform and stores **two account values**:
+
+- `username` — the account username/handle used to build the profile URL.
+- `displayName` — the name the student displays on that platform. This is what the profile information table shows.
+
+The `platform` field identifies which social network the entry belongs to; the two student-specific values are `username` and `displayName`.
 
 Example:
 
 ```json
-"socialMedia": {
-    "github": "CodeX176-pgn",
-    "tiktok": "example_user",
-    "youtube": "example_channel"
-}
+"socialMedia": [
+    {
+        "platform": "github",
+        "username": "CodeX176-pgn",
+        "displayName": "CodeX"
+    },
+    {
+        "platform": "tiktok",
+        "username": "example_user",
+        "displayName": "Example"
+    }
+]
 ```
 
 Only add platforms that the student actually has.
 
-You **do not** need to include every supported platform.
+The website uses the values differently depending on where they appear:
 
-For example, this is completely valid:
+| Website element | Value used |
+| --- | --- |
+| Social-media button URL | `username` |
+| Profile information table | `displayName` |
 
-```json
-"socialMedia": {
-    "github": "example_user"
-}
-```
-
-The website will only display social-media platforms that have a value.
+The button can therefore open `https://tiktok.com/@example_user` while the information table displays `Example`.
 
 ---
 
 ## Supported Social Platforms
 
-| Platform | JSON key   |
+| Platform | JSON value |
 | -------- | ---------- |
 | GitHub   | `github`   |
 | TikTok   | `tiktok`   |
@@ -334,27 +345,23 @@ js/social.js
 
 ---
 
-# Social Media URLs
+## Social Media URLs
 
-Depending on the configuration in `social.js`, social-media values can be usernames or complete URLs.
+The `username` is used to construct the profile URL according to the platform rules in `js/social.js`.
 
-### Username
+For example:
 
 ```json
-"socialMedia": {
-    "github": "example_user"
+{
+    "platform": "github",
+    "username": "CodeX176-pgn",
+    "displayName": "CodeX"
 }
 ```
 
-### Complete URL
+The website uses `CodeX176-pgn` for the URL and `CodeX` for the profile table.
 
-```json
-"socialMedia": {
-    "github": "https://github.com/example_user"
-}
-```
-
-Use the format that matches the existing project configuration.
+You normally only need to enter the username/handle, not the complete URL.
 
 ---
 

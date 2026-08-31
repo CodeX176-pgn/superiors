@@ -5,11 +5,17 @@
  *
  * Generates the social-media buttons shown underneath a student card.
  *
- * Platform-specific URL and icon rules remain in the shared social.js
- * file. This module only turns those rules into card markup.
+ * Each social-media entry now has three pieces of information:
  *
- * Unsupported platforms are ignored by the shared social helpers, so
- * this module only renders links that resolve to valid destinations.
+ *     {
+ *         "platform": "tiktok",
+ *         "username": "example_user",
+ *         "displayName": "Example Name"
+ *     }
+ *
+ * The important distinction is that the BUTTON uses `username` to
+ * build the external profile URL. The profile information table uses
+ * `displayName` for what the student calls themselves on that platform.
  * ============================================================
  */
 
@@ -22,45 +28,43 @@
     const escapeHTML = directory.helpers.escapeHTML;
 
     /**
-     * Convert one student's social-media object into HTML links.
+     * Convert one student's social-media list into HTML links.
      *
      * @param {Object} student - Student data object.
      * @returns {string} Social-link HTML, or an empty string.
      */
     function createSocialLinks(student) {
-        if (!student || !student.socialMedia) {
+        if (!student || !Array.isArray(student.socialMedia)) {
             return "";
         }
 
-        return Object.entries(student.socialMedia)
-            .map(([platform, username]) => {
-                /**
-                 * Ignore empty or placeholder values such as "-" and
-                 * "--". The shared helper comes from social.js.
-                 */
-                if (isMissingSocialValue(username)) {
+        return student.socialMedia
+            .map((social) => {
+                // Ignore malformed entries instead of allowing one bad
+                // social-media record to break the entire student card.
+                if (!social || typeof social !== "object") {
                     return "";
                 }
 
-                /**
-                 * Convert either a username or a complete URL into a
-                 * usable profile URL using the shared social helper.
-                 */
+                const platform = String(social.platform || "").trim();
+                const username = String(social.username || "").trim();
+
+                // A platform and username are required to create a link.
+                if (!platform || isMissingSocialValue(username)) {
+                    return "";
+                }
+
+                // Build the external profile URL from the username only.
                 const url = getSocialUrl(platform, username);
 
                 if (!url) {
                     return "";
                 }
 
-                /**
-                 * Resolve the appropriate Remix Icon CSS class.
-                 */
+                // Resolve the appropriate Remix Icon CSS class.
                 const iconName = getSocialIconName(platform);
 
-                /**
-                 * Turn the raw platform key into a readable label.
-                 * Example: "github" becomes "Github".
-                 */
+                // Make the platform name readable for accessibility text.
                 const readablePlatform =
                     String(platform).charAt(0).toUpperCase() +
                     String(platform).slice(1).toLowerCase();

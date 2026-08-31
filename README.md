@@ -49,6 +49,39 @@ The project is designed to present student information in a clean directory inte
 
 ---
 
+# Social Media Data Structure
+
+Each student's social-media accounts are stored as a list in `assets/data.json`.
+Every entry identifies the platform and keeps the account **username** separate from the student's **display name** on that platform.
+
+```json
+"socialMedia": [
+    {
+        "platform": "github",
+        "username": "example_username",
+        "displayName": "Example Name"
+    },
+    {
+        "platform": "tiktok",
+        "username": "example_user",
+        "displayName": "Example"
+    }
+]
+```
+
+The two account values have different purposes:
+
+| Value | Purpose |
+| --- | --- |
+| `username` | Used to build the external social-media profile URL. |
+| `displayName` | Displayed in the student's profile information table. |
+
+For example, if a TikTok account has `username` set to `example_user` and `displayName` set to `Example`, the social button opens the account associated with `@example_user`, while the profile table displays `Example`.
+
+The `platform` value tells the application which social network is being represented and which URL/icon configuration to use.
+
+---
+
 # Project Structure
 
 ```text
