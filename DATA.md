@@ -10,7 +10,7 @@ This file explains how to add, edit, and manage student information for the SUPE
 
 ---
 
-## Data Flow
+# Data Flow
 
 The student data follows this structure:
 
@@ -40,11 +40,16 @@ To add a new student:
 2. Find the `"students"` array.
 3. Add a new student object.
 4. Fill in the available information.
-5. Add the student's images to `assets/images/students/`.
+5. Add the student's images to:
+
+   ```text
+   assets/images/students/
+   ```
 6. Use the correct image paths in the JSON.
-7. Do **not** manually add a `serialNumber`.
-8. Make sure the JSON syntax is valid.
-9. Save the file and refresh the website.
+7. Add social-media accounts using the current `socialMedia` list structure.
+8. **Do not manually add a `serialNumber`.**
+9. Make sure the JSON syntax is valid.
+10. Save the file and refresh the website.
 
 ---
 
@@ -72,14 +77,18 @@ Copy this template into the `"students"` array in `assets/data.json`:
     "favoriteColor": "Color",
     "bestSubject": "Subject",
 
-    "socialMedia": {
-        "github": "github_username",
-        "youtube": "youtube_username",
-        "tiktok": "tiktok_username",
-        "twitter": "twitter_username",
-        "x": "x_username",
-        "facebook": "facebook_username"
-    },
+    "socialMedia": [
+        {
+            "platform": "github",
+            "username": "github_username",
+            "displayName": "GitHub Display Name"
+        },
+        {
+            "platform": "tiktok",
+            "username": "tiktok_username",
+            "displayName": "TikTok Display Name"
+        }
+    ],
 
     "image": "assets/images/students/student-main.png",
     "hoverImage": "assets/images/students/student-hover.png"
@@ -108,10 +117,10 @@ The student's full name.
 
 The application uses the name when:
 
-* Displaying the student card
-* Displaying the profile
-* Sorting students alphabetically
-* Searching for students
+* Displaying the student card.
+* Displaying the profile.
+* Sorting students alphabetically.
+* Searching for students.
 
 ---
 
@@ -236,7 +245,7 @@ The student's favorite anime.
 ### Example
 
 ```json
-"favoriteAnime": "Jujutsu Kaisen"
+"favoriteAnime": "Naruto"
 ```
 
 **Required:** No
@@ -289,12 +298,11 @@ The student's best or favorite school subject.
 
 Social-media accounts are stored inside the `socialMedia` array.
 
-Each entry identifies a platform and stores **two account values**:
+Each entry contains **three values**:
 
-- `username` — the account username/handle used to build the profile URL.
-- `displayName` — the name the student displays on that platform. This is what the profile information table shows.
-
-The `platform` field identifies which social network the entry belongs to; the two student-specific values are `username` and `displayName`.
+* `platform` — identifies the social-media platform.
+* `username` — the account username/handle used to build the profile URL.
+* `displayName` — the name the student displays on that platform.
 
 Example:
 
@@ -315,27 +323,58 @@ Example:
 
 Only add platforms that the student actually has.
 
+---
+
+## How the Values Are Used
+
 The website uses the values differently depending on where they appear:
 
-| Website element | Value used |
-| --- | --- |
-| Social-media button URL | `username` |
+| Website element           | Value used    |
+| ------------------------- | ------------- |
+| Social-media platform     | `platform`    |
+| Social-media button URL   | `username`    |
 | Profile information table | `displayName` |
 
-The button can therefore open `https://tiktok.com/@example_user` while the information table displays `Example`.
+For example:
+
+```json
+{
+    "platform": "tiktok",
+    "username": "example_user",
+    "displayName": "Example"
+}
+```
+
+The social-media button uses:
+
+```text
+example_user
+```
+
+to open the student's TikTok account.
+
+The profile information table displays:
+
+```text
+Example
+```
+
+The username shown in the profile information table is **not a clickable link**.
 
 ---
 
-## Supported Social Platforms
+# Supported Social Platforms
 
-| Platform | JSON value |
-| -------- | ---------- |
-| GitHub   | `github`   |
-| TikTok   | `tiktok`   |
-| YouTube  | `youtube`  |
-| Twitter  | `twitter`  |
-| X        | `x`        |
-| Facebook | `facebook` |
+The currently supported platforms are:
+
+| Platform | `platform` value |
+| -------- | ---------------- |
+| GitHub   | `github`         |
+| TikTok   | `tiktok`         |
+| YouTube  | `youtube`        |
+| Twitter  | `twitter`        |
+| X        | `x`              |
+| Facebook | `facebook`       |
 
 The social-media configuration is handled by:
 
@@ -345,9 +384,11 @@ js/social.js
 
 ---
 
-## Social Media URLs
+# Social Media URLs
 
-The `username` is used to construct the profile URL according to the platform rules in `js/social.js`.
+You normally only need to provide the account username/handle.
+
+You do **not** need to enter the complete external URL.
 
 For example:
 
@@ -359,9 +400,13 @@ For example:
 }
 ```
 
-The website uses `CodeX176-pgn` for the URL and `CodeX` for the profile table.
+The application uses the username according to the URL rules configured in:
 
-You normally only need to enter the username/handle, not the complete URL.
+```text
+js/social.js
+```
+
+This allows the social-media URL format to remain centralized in the project instead of being repeated throughout the student data.
 
 ---
 
@@ -422,7 +467,7 @@ The `image` field contains the normal image displayed on the student card and pr
 
 # Hover Image
 
-The `hoverImage` field contains the alternate image used by the card hover interaction.
+The `hoverImage` field contains the alternate image used by the student-card hover interaction.
 
 ### Example
 
@@ -483,13 +528,13 @@ Serial numbers use three digits:
 ...
 ```
 
-This means you do not need to update existing serial numbers when adding a new student.
+This means you do not need to manually update serial numbers when adding a new student.
 
 ---
 
 # Complete Example
 
-Here is an example containing multiple students:
+The following example uses the current social-media structure:
 
 ```json
 {
@@ -513,10 +558,18 @@ Here is an example containing multiple students:
             "favoriteColor": "Purple",
             "bestSubject": "English",
 
-            "socialMedia": {
-                "github": "alicebrown",
-                "tiktok": "alice_brown"
-            },
+            "socialMedia": [
+                {
+                    "platform": "github",
+                    "username": "alicebrown",
+                    "displayName": "Alice Brown"
+                },
+                {
+                    "platform": "tiktok",
+                    "username": "alice_brown",
+                    "displayName": "Ali"
+                }
+            ],
 
             "image": "assets/images/students/alice-main.png",
             "hoverImage": "assets/images/students/alice-hover.png"
@@ -541,10 +594,18 @@ Here is an example containing multiple students:
             "favoriteColor": "Black",
             "bestSubject": "Mathematics",
 
-            "socialMedia": {
-                "github": "johndoe",
-                "youtube": "johndoe"
-            },
+            "socialMedia": [
+                {
+                    "platform": "github",
+                    "username": "johndoe",
+                    "displayName": "John Doe"
+                },
+                {
+                    "platform": "youtube",
+                    "username": "johndoe",
+                    "displayName": "John"
+                }
+            ],
 
             "image": "assets/images/students/john-main.png",
             "hoverImage": "assets/images/students/john-hover.png"
@@ -585,7 +646,7 @@ To add another student, place a comma after the existing object and add the new 
 }
 ```
 
-The application will automatically sort them alphabetically and generate their serial numbers.
+The application will automatically sort the students alphabetically and generate their serial numbers.
 
 ---
 
@@ -593,7 +654,7 @@ The application will automatically sort them alphabetically and generate their s
 
 Because `assets/data.json` is a JSON file, follow these rules carefully.
 
-### Use double quotes
+## Use double quotes
 
 Correct:
 
@@ -607,7 +668,9 @@ Incorrect:
 'name': 'John Doe'
 ```
 
-### Separate properties with commas
+---
+
+## Separate properties with commas
 
 Correct:
 
@@ -618,7 +681,9 @@ Correct:
 }
 ```
 
-### Do not add a trailing comma
+---
+
+## Do not add a trailing comma
 
 Incorrect:
 
@@ -636,7 +701,9 @@ Correct:
 }
 ```
 
-### Use arrays correctly
+---
+
+## Use arrays correctly
 
 Correct:
 
@@ -647,16 +714,37 @@ Correct:
 ]
 ```
 
-### Use objects correctly
+---
+
+## Use the social-media list correctly
 
 Correct:
 
 ```json
+"socialMedia": [
+    {
+        "platform": "github",
+        "username": "example",
+        "displayName": "Example"
+    },
+    {
+        "platform": "tiktok",
+        "username": "example_user",
+        "displayName": "Example User"
+    }
+]
+```
+
+Do **not** use the old object-based format:
+
+```json
 "socialMedia": {
     "github": "example",
-    "tiktok": "example"
+    "tiktok": "example_user"
 }
 ```
+
+The current project uses the **list/array format** so that each social-media account can contain both a username and a display name.
 
 ---
 
@@ -676,6 +764,9 @@ Before saving `assets/data.json`, check:
 * [ ] Favorite color has been added if available.
 * [ ] Best subject has been added if available.
 * [ ] Available social-media accounts have been added.
+* [ ] Every social-media entry has a `platform`.
+* [ ] Every social-media entry has a `username`.
+* [ ] Every social-media entry has a `displayName`.
 * [ ] Main image has been placed in `assets/images/students/`.
 * [ ] Hover image has been placed in `assets/images/students/` if available.
 * [ ] Image paths start with `assets/images/`.
@@ -697,6 +788,7 @@ Before saving `assets/data.json`, check:
 | Student images             | `assets/images/students/`               |
 | Default profile image      | `assets/images/students/no_profile.png` |
 | Data documentation         | `DATA.md`                               |
+| Project documentation      | `README.md`                             |
 | Automated QA               | `tests/qa.test.js`                      |
 
 ---
@@ -729,4 +821,4 @@ assets/data.json
 Actual student information
 ```
 
-This keeps the project easier to maintain and makes it clear where new student records should be added.
+This keeps the project easier to maintain and makes it clear where new student records should be add
