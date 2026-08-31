@@ -27,7 +27,7 @@
                 "Coding"
             ],
             "favoriteMovie": "Underworld: Blood Wars",
-            "favoriteGame": "Free Fire & Blood Strike",
+            "favoriteGames": "Free Fire & Blood Strike",
             "bestSubject": "Mathematics",
 
             "image": "assets/images/students/Attah-main.jpeg",
@@ -52,26 +52,26 @@
                     "displayName": "Drac TV"
                 }
             ],
-
+            
             "hobbies": [
                 "Playing Games",
                 "Watching Anime",
                 "Playing Football"
             ],
             "favoriteGame": "Free Fire",
-            "favouriteAnime": "Bluelock",
-            "favouriteMusic": "Montagem Gritos Talento 3",
-
+            "favoriteAnime": "Bluelock",
+            "favoriteMusic": "Montagem Gritos Talento 3",
+            
             "image": "assets/images/students/chiuwa-main.jpeg",
             "hoverImage": "assets/images/students/chiuwa-hover.jpeg"
         },
-
+        
         {
             "name": "Chukwuma Somto",
             "nickname": "Chuks",
             "phone": "+234 916 848 5068",
-            "stateOfOrrigin": "Anambra",
-
+            "stateOfOrigin": "Anambra",
+            
             "socialMedia": [
                 {
                     "platform": "tiktok",
@@ -79,11 +79,42 @@
                     "displayName": "kuma"
                 }
             ],
-
+            
             "hobbies": [
                 "Playing Football"
             ],
-            "favouriteGame": "Dream League Soccer"
+            "favoriteGame": "Dream League Soccer"
+        },
+        
+        {
+            "name": "Ekeigwe Derick",
+            "nickname": "St. Blood",
+            "phone": "+234 810 057 4170",
+            "stateOfOrigin": "Imo (but born in South Africa)",
+
+            "socialMedia": [
+                {
+                    "platform": "tiktok",
+                    "displayName": "St blood"
+                },
+                {
+                    "platform": "youtube",
+                    "displayName": "Derick Ekeigwe"
+                },
+                {
+                    "platform": "facebook",
+                    "displayName": "Derick Ekeigwe"
+                }
+            ],
+
+            "hobbies": [
+                "Playing Football",
+                "Rapping"
+            ],
+            "favoriteMovie": "Bad Boys",
+            "favoriteGame": "Call Of Duty",
+            "favoriteMusic": "Revenge by XXX Tentation",
+            "bestSubject": "French"
         },
 
         {
@@ -116,7 +147,7 @@
             "name": "Ifediba Arinze",
             "nickname": "Dibia",
             "phone": "+234 707 311 8377",
-            "state Of Origin": "Anambra",
+            "stateOfOrigin": "Anambra",
 
             "hobbies": [
                 "Playing Games",
@@ -230,9 +261,9 @@
                 "Watching Anime",
                 "Viewing Tiktok Videos"
             ],
-            "favoriteGame": "Grand Theft Auto V",
+            "favoriteGames": "Grand Theft Auto V & Dream League Soccer",
             "favoriteAnime": "Jujutsu Kaisen",
-            "favouriteMovieSeries": "Invincibles",
+            "favoriteMovieSeries": "Invincibles",
             "bestSubject": "Mathematics",
 
             "image": "assets/images/students/leslie-main.jpeg",
