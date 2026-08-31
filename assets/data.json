@@ -1,6 +1,40 @@
 {
     "students": [
         {
+            "name": "Attah Kamsi",
+            "nickname": "Luigi Gonzaga",
+            "phone": "+234 703 623 0395",
+            "stateOfOrigin": "Ebonyi",
+            
+            "socialMedia": [
+                {
+                    "platform": "facebook",
+                    "username": "Luigi Gonzaga",
+                    "displayName": "Luigi Gonzaga"
+                },
+                {
+                    "platform": "tiktok",
+                    "username": "zaga_editz4",
+                    "displayName": "Luigi Gonzaga"
+                }
+            ],
+
+            "hobbies": [
+                "Rage Baiting",
+                "Making Editz",
+                "Listening to Phonks",
+                "Reading",
+                "Coding"
+            ],
+            "favoriteMovie": "Underworld: Blood Wars",
+            "favoriteGame": "Free Fire & Blood Strike",
+            "bestSubject": "Mathematics",
+
+            "image": "assets/images/students/Attah-main.jpeg",
+            "hoverImage": "assets/images/students/Attah-hover.jpeg"
+        },
+
+        {
             "name": "Chiuwa Elvis",
             "nickname": "Supreme",
             "phone": "+234 913 755 9067",
@@ -76,6 +110,21 @@
 
             "image": "assets/images/students/eseni-main.jpeg",
             "hoverImage": "assets/images/students/eseni-hover.jpeg"
+        },
+
+        {
+            "name": "Ifediba Arinze",
+            "nickname": "Dibia",
+            "phone": "+234 707 311 8377",
+            "state Of Origin": "Anambra",
+
+            "hobbies": [
+                "Playing Games",
+                "Sleeping"
+            ],
+            "favoriteGame": "Payback",
+            "favoriteMovie": "Countdown",
+            "favoriteMusic": "Charm"
         },
 
         {
