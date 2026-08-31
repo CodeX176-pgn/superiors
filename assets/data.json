@@ -3,9 +3,9 @@
         {
             "name": "Chiuwa Elvis",
             "nickname": "Supreme",
-            "title": "--",
             "phone": "+234 913 755 9067",
             "stateOfOrigin": "Imo",
+
             "socialMedia": [
                 {
                     "platform": "tiktok",
@@ -18,6 +18,7 @@
                     "displayName": "Drac TV"
                 }
             ],
+
             "hobbies": [
                 "Playing Games",
                 "Watching Anime",
@@ -26,6 +27,7 @@
             "favoriteGame": "Free Fire",
             "favouriteAnime": "Bluelock",
             "favouriteMusic": "Montagem Gritos Talento 3",
+
             "image": "assets/images/students/chiuwa-main.jpeg",
             "hoverImage": "assets/images/students/chiuwa-hover.jpeg"
         },
@@ -35,6 +37,7 @@
             "nickname": "Chuks",
             "phone": "+234 916 848 5068",
             "stateOfOrrigin": "Anambra",
+
             "socialMedia": [
                 {
                     "platform": "tiktok",
@@ -42,6 +45,7 @@
                     "displayName": "kuma"
                 }
             ],
+
             "hobbies": [
                 "Playing Football"
             ],
@@ -54,6 +58,7 @@
             "title": "Most Corrupt",
             "phone": "+234 807 560 2343",
             "stateOfOrigin": "Ebonyi",
+
             "socialMedia": [
                 {
                     "platform": "tiktok",
@@ -61,21 +66,25 @@
                     "displayName": "Vibëz"
                 }
             ],
+
             "hobbies": [
                 "Gaming",
                 "Viewing Tiktok Videos",
                 "Watching Anime & Netflix Movies"
             ],
             "favoriteGame": "Ghost of Tsushima",
+
             "image": "assets/images/students/eseni-main.jpeg",
             "hoverImage": "assets/images/students/eseni-hover.jpeg"
         },
+
         {
             "name": "Ndoh Cyril",
             "nickname": "CodeX",
-            "title": "--",
-            "stateOfOrigin": "Imo",
             "phone": "+234 810 020 9048",
+            "email": "codespace176@gmail.com",
+            "stateOfOrigin": "Imo",
+
             "socialMedia": [
                 {
                     "platform": "github",
@@ -88,26 +97,29 @@
                     "displayName": "CodeX"
                 }
             ],
+
             "hobbies": [
                 "Vibe Coding",
                 "Gaming",
                 "Watching Anime"
             ],
-            "email": "codespace176@gmail.com",
             "favoriteAnime": "Demon Slayer",
             "favoriteMusic": "'Ready' by Madara Dusal",
             "favoriteGame": "Free Fire",
             "favoriteColor": "Black",
             "bestSubject": "Mathematics",
+
             "image": "assets/images/students/yuji-main.png",
             "hoverImage": "assets/images/students/yuji-hover.png"
         },
+
         {
             "name": "Nwaigwe Chidiebube",
             "nickname": "Deyon Jnr",
             "title": "Best Basketballer",
             "phone": "+234 903 543 2368",
             "stateOfOrigin": "Imo",
+
             "hobbies": [
                 "Watching Movie",
                 "Playing Any Interesting Sports"
@@ -115,15 +127,17 @@
             "favoriteGame": "Call Of Duty: Mobile",
             "favoriteMovie": "Prison Break",
             "bestSubject": "Religious and Moral Education",
+
             "image": "assets/images/students/nwaigwe.jpeg",
             "hoverImage": "assets/images/students/nwaigwe.jpeg"
         },
+
         {
             "name": "Okoro David",
             "nickname": "Silent X",
-            "title": "--",
             "phone": "+234 703 582 6717",
             "stateOfOrigin": "Imo (but born in South Africa)",
+
             "socialMedia": [
                 {
                     "platform": "tiktok",
@@ -131,6 +145,7 @@
                     "displayName": "𝕶𝖎𝖓𝖌𝖘+𝕰𝖉𝖎𝖙𝖘"
                 }
             ],
+
             "hobbies": [
                 "Playing Video Games",
                 "Rizz",
@@ -139,15 +154,17 @@
             ],
             "favoriteAnime": "Jujutsu Kaisen",
             "favoriteMusic": "Ransom",
+
             "image": "assets/images/students/okoro-main.jpeg",
             "hoverImage": "assets/images/students/okoro-hover.jpeg"
         },
+
         {
             "name": "Oluoha Leslie",
             "nickname": "Leslie",
-            "title": "--",
             "phone": "+234 702 632 7380",
             "stateOfOrigin": "Imo",
+
             "socialMedia": [
                 {
                     "platform": "tiktok",
@@ -155,6 +172,7 @@
                     "displayName": "★LESLIE★™"
                 }
             ],
+
             "hobbies": [
                 "Playing Football",
                 "Playing Video Games",
@@ -167,15 +185,17 @@
             "favoriteAnime": "Jujutsu Kaisen",
             "favouriteMovieSeries": "Invincibles",
             "bestSubject": "Mathematics",
+
             "image": "assets/images/students/leslie-main.jpeg",
             "hoverImage": "assets/images/students/leslie-hover.jpeg"
         },
+
         {
             "name": "Umez Elvis",
             "nickname": "Above The Law",
-            "title": "--",
             "phone": "+234 816 899 0212",
             "stateOfOrigin": "Imo",
+
             "hobbies": [
                 "Singing",
                 "Reading",
