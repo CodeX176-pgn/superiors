@@ -166,6 +166,25 @@ SUPERIORS — DARK GLASS FOOTER
         box-shadow 0.2s ease;
 }
 
+.creator-github-link--unavailable {
+    /*
+     * Keep the unavailable profile visually consistent with the other
+     * creator cards while making it clear that it cannot be opened.
+     */
+    cursor: not-allowed;
+    opacity: 0.62;
+}
+
+.creator-github-link--unavailable:hover {
+    /*
+     * Disabled creator links should not look like interactive links.
+     */
+    background: rgba(255, 255, 255, 0.025);
+    border-color: rgba(205, 187, 236, 0.12);
+    transform: none;
+    box-shadow: none;
+}
+
 .creator-github-link:hover {
     background: rgba(169, 112, 255, 0.08);
     border-color: rgba(190, 151, 255, 0.32);
