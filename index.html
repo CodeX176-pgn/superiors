@@ -335,6 +335,7 @@
                             <a
                                 href="https://github.com/codex176-pgn"
                                 class="creator-github-link"
+                                id="creatorGithubLink"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label="CodeX on GitHub (CodeX176-pgn)"
@@ -353,15 +354,22 @@
                             </a>
                         </li>
 
-                        <!-- Leslie GitHub profile -->
+                        <!--
+                            Leslie's GitHub profile is temporarily unavailable.
+
+                            IMPORTANT: Do not put a placeholder GitHub URL here.
+                            creators.js controls whether this button is clickable.
+                            When the profile becomes available, update only the
+                            PARTNER_GITHUB_URL constant in js/creators.js.
+                        -->
                         <li class="creator-item">
                             <a
-                                href="https://github.com/Leslie123-abc"
-                                class="creator-github-link"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label="Leslie on GitHub (Leslie123-abc)"
-                                title="Leslie on GitHub"
+                                href="#"
+                                class="creator-github-link creator-github-link--unavailable"
+                                id="partnerGithubLink"
+                                aria-disabled="true"
+                                aria-label="Leslie's GitHub profile is currently unavailable"
+                                title="Leslie's GitHub profile is currently unavailable"
                             >
                                 <i
                                     class="ri-github-fill"
@@ -371,7 +379,7 @@
                                     Leslie
                                 </span>
                                 <span class="creator-handle">
-                                    leslie123-abc
+                                    GitHub unavailable
                                 </span>
                             </a>
                         </li>
@@ -442,6 +450,9 @@
 
         <!--? Directory entry point / initialization -->
         <script src="js/script.js"></script>
+
+    <!-- Controls the availability of project creator profile links. -->
+    <script src="js/creators.js"></script>
 
     </body>
 

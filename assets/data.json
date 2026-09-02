@@ -172,6 +172,7 @@
             "coverImage": "assets/images/students/yuji-cover.png",
             "profileImage": "assets/images/students/yuji-profile.png"
         },
+
         {
             "name": "Nwaigwe Chidiebube",
             "nickname": "Deyon Jnr",
@@ -185,9 +186,10 @@
             "favoriteGame": "Call Of Duty: Mobile",
             "favoriteMovie": "Prison Break",
             "bestSubject": "Religious and Moral Education",
-            "coverImage": "assets/images/students/nwaigwe.jpeg",
-            "profileImage": "assets/images/students/nwaigwe.jpeg"
+            "coverImage": "assets/images/students/nwaigwe-cover.jpeg",
+            "profileImage": "assets/images/students/nwaigwe-profile.jpeg"
         },
+
         {
             "name": "Okoro David",
             "nickname": "Silent X",
@@ -211,6 +213,7 @@
             "coverImage": "assets/images/students/okoro-cover.jpeg",
             "profileImage": "assets/images/students/okoro-profile.jpeg"
         },
+
         {
             "name": "Oluoha Leslie",
             "nickname": "Leslie",
@@ -238,6 +241,28 @@
             "coverImage": "assets/images/students/leslie-cover.jpeg",
             "profileImage": "assets/images/students/leslie-profile.jpeg"
         },
+
+        {
+            "name": "Onwuegbuchelem Uche",
+            "nickname": "Sage",
+            "phone": "+234 803 275 9591",
+            "stateOfOrigin": "Imo",
+            "socialMedia": [
+                {
+                    "platform": "tiktok",
+                    "username": "itzjstgabriel",
+                    "displayName": "itz jst GABRIEL"
+                }
+            ],
+            "hobbies": [
+                "Coding",
+                "Watching Anime"
+            ],
+            "favoriteGame": "Free Fire",
+            "coverImage": "assets/images/students/uche.jpeg",
+            "profileImage": "assets/images/students/uche.jpeg"
+        },
+
         {
             "name": "Umez Elvis",
             "nickname": "Above The Law",

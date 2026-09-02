@@ -2,6 +2,9 @@
 # SUPERIORS — Git Ignore Rules
 # ============================================================
 
+# VS Code Workspace file
+*.code-workspace
+
 # Node.js dependencies
 node_modules/
 
