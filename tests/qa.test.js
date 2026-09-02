@@ -19,7 +19,7 @@
  * - Automatic three-digit serial-number generation
  * - Search behavior
  * - Social-media data
- * - Student image paths
+ * - Student cover/profile image paths
  * - Default profile-image availability
  * - Required accessibility hooks
  * - HTML script dependency order
@@ -113,11 +113,11 @@ function projectFileExists(relativePath) {
  *
  * Example:
  *
- *     assets/images/students/yuji-main.png
+ *     assets/images/students/yuji-cover.png
  *
  * becomes:
  *
- *     <project-root>/assets/images/students/yuji-main.png
+ *     <project-root>/assets/images/students/yuji-cover.png
  *
  * @param {string} assetPath - Browser asset path.
  * @returns {string} Absolute local path.
@@ -439,7 +439,66 @@ test(
 
 
 // ============================================================
-// 8. SEARCH TESTS
+// 8. STUDENT IMAGE TESTS
+// ============================================================
+
+test(
+    "student image fields use coverImage and profileImage",
+    () => {
+        students.forEach((student) => {
+            assert.equal(
+                Object.prototype.hasOwnProperty.call(student, "image"),
+                false,
+                `${student.name} must not use the legacy image field.`
+            );
+
+            assert.equal(
+                Object.prototype.hasOwnProperty.call(student, "hoverImage"),
+                false,
+                `${student.name} must not use the legacy hoverImage field.`
+            );
+
+            if (student.coverImage) {
+                assert.equal(
+                    typeof student.coverImage,
+                    "string",
+                    `${student.name}'s coverImage must be a string.`
+                );
+            }
+
+            if (student.profileImage) {
+                assert.equal(
+                    typeof student.profileImage,
+                    "string",
+                    `${student.name}'s profileImage must be a string.`
+                );
+            }
+        });
+    }
+);
+
+
+test(
+    "student cover and profile image assets exist when supplied",
+    () => {
+        students.forEach((student) => {
+            ["coverImage", "profileImage"].forEach((field) => {
+                if (!student[field]) {
+                    return;
+                }
+
+                assert.ok(
+                    projectFileExists(student[field]),
+                    `${student.name}'s ${field} asset does not exist: ${student[field]}`
+                );
+            });
+        });
+    }
+);
+
+
+// ============================================================
+// 9. SEARCH TESTS
 // ============================================================
 
 test(

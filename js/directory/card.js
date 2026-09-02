@@ -108,26 +108,27 @@
            ==================================================== */
 
         /**
-         * Use the student's supplied image when available.
-         * Otherwise use the unavailable placeholder.
+         * The cover image is the default artwork shown on the card.
+         * It can be any image chosen for the student, so it is
+         * intentionally separate from the student's actual portrait.
          */
-        const mainImageValue =
-            String(student.image ?? "").trim();
+        const coverImageValue =
+            String(student.coverImage ?? "").trim();
 
-        const mainImage =
+        const coverImage =
             escapeHTML(
-                mainImageValue || DEFAULT_STUDENT_IMAGE
+                coverImageValue || DEFAULT_STUDENT_IMAGE
             );
 
         /**
-         * Hover image remains optional.
-         *
-         * The unavailable placeholder is intentionally NOT used
-         * as a hover image.
+         * The profile image is the student's actual/main portrait.
+         * It is optional because some student records do not yet have
+         * a profile photo. When absent, the card simply remains on the
+         * cover image and the profile page uses its normal fallback.
          */
-        const hoverImage =
+        const profileImage =
             escapeHTML(
-                String(student.hoverImage ?? "").trim()
+                String(student.profileImage ?? "").trim()
             );
 
 
@@ -171,22 +172,22 @@
             >
                 <div class="student-image-container">
 
-                    <!-- Main student image -->
+                    <!-- Student cover image shown by default -->
                     <img
-                        class="student-image main-student-image"
-                        src="${mainImage}"
+                        class="student-image cover-student-image"
+                        src="${coverImage}"
                         alt="Photo of ${name}"
                         loading="lazy"
                         decoding="async"
                     >
 
-                    <!-- Optional hover image -->
+                    <!-- Optional profile image revealed on desktop hover/touch activation -->
                     ${
-                        hoverImage
+                        profileImage
                             ? `
                                 <img
-                                    class="student-image hover-student-image"
-                                    src="${hoverImage}"
+                                    class="student-image profile-student-image"
+                                    src="${profileImage}"
                                     alt=""
                                     aria-hidden="true"
                                     loading="lazy"
@@ -278,26 +279,26 @@
 
 
         /* ====================================================
-           MAIN IMAGE FALLBACK
+           COVER IMAGE FALLBACK
            ==================================================== */
 
         /**
-         * Find the main profile image.
+         * Find the card's default cover image.
          */
-        const mainImageElement =
-            card.querySelector(".main-student-image");
+        const coverImageElement =
+            card.querySelector(".cover-student-image");
 
-        if (mainImageElement) {
+        if (coverImageElement) {
 
             /**
              * Replace a broken student image with the default
              * unavailable placeholder.
              */
-            mainImageElement.addEventListener(
+            coverImageElement.addEventListener(
                 "error",
                 () => {
-                    mainImageElement.onerror = null;
-                    mainImageElement.src =
+                    coverImageElement.onerror = null;
+                    coverImageElement.src =
                         DEFAULT_STUDENT_IMAGE;
                 },
                 { once: true }
@@ -306,21 +307,21 @@
 
 
         /* ====================================================
-           HOVER IMAGE FALLBACK
+           PROFILE IMAGE FALLBACK
            ==================================================== */
 
         /**
-         * A broken hover image should simply disappear rather
-         * than replacing the student's main profile image.
+         * A broken profile image should simply disappear from the
+         * reveal layer rather than replacing the student's cover image.
          */
-        const hoverImageElement =
-            card.querySelector(".hover-student-image");
+        const profileImageElement =
+            card.querySelector(".profile-student-image");
 
-        if (hoverImageElement) {
-            hoverImageElement.addEventListener(
+        if (profileImageElement) {
+            profileImageElement.addEventListener(
                 "error",
                 () => {
-                    hoverImageElement.style.display = "none";
+                    profileImageElement.style.display = "none";
                 },
                 { once: true }
             );

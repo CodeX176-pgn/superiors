@@ -22,7 +22,7 @@ The project presents student information through an interactive directory with s
 
 * Student cards with:
 
-  * Profile image
+  * Cover image by default, with the profile image revealed on interaction
   * Serial number
   * Name
   * Nickname
@@ -30,7 +30,7 @@ The project presents student information through an interactive directory with s
   * Phone number
   * Social-media links
 
-* Alternate hover images.
+* Cover images with profile-image reveal on desktop hover/touch activation.
 
 * Touch-friendly student-card interactions.
 
@@ -310,17 +310,17 @@ assets/images/students/
 
 Each student can have:
 
-* A main image
-* A hover image
+* A cover image
+* A profile image
 
 Example:
 
 ```text
-assets/images/students/student-main.png
-assets/images/students/student-hover.png
+assets/images/students/student-cover.png
+assets/images/students/student-profile.png
 ```
 
-If a student's image is unavailable, the project can use:
+If a student's cover image is unavailable, the project can use:
 
 ```text
 assets/images/students/no_profile.png
@@ -454,3 +454,16 @@ When making changes:
 No license has currently been specified for the project.
 
 If the project is intended to be reused, modified, or redistributed by others, add an appropriate `LICENSE` file to the repository.
+
+## Project Creator GitHub Availability
+
+Leslie's GitHub profile link is intentionally unavailable until the account/profile is ready. The footer does not contain a placeholder profile URL.
+
+To enable the link later, edit **`js/creators.js`** and change:
+
+```js
+const PARTNER_GITHUB_URL = "";
+```
+
+to the real GitHub profile URL. The footer will automatically become clickable and display the GitHub username from the URL.
+

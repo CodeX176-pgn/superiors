@@ -10,7 +10,7 @@
  * - Dynamically rendering populated information fields
  * - Rendering available social-media accounts
  * - Rendering social-media links through social.js
- * - Profile-image hover/touch transitions
+ * - Profile-image loading and fallback handling
  * - Missing-image handling
  * - Invalid/missing student IDs
  * - Profile → Home navigation
@@ -29,7 +29,7 @@
 
     /**
      * Default profile image used when the selected student
-     * does not have a usable main image.
+     * does not have a usable profile image.
      *
      * Keep this path identical to the placeholder used by card.js.
      */
@@ -366,8 +366,8 @@
                 "nickname",
                 "title",
                 "serialNumber",
-                "image",
-                "hoverImage",
+                "coverImage",
+                "profileImage",
                 "socialMedia"
             ]);
 
@@ -642,39 +642,32 @@
            PROFILE IMAGE
            -------------------------------------------------------- */
 
-        if (!profileImage) {
-            return;
-        }
-
-        const mainImage =
+        /**
+         * The profile page always displays the student's actual
+         * profile portrait. The card cover image is deliberately not
+         * used here because it is intended only as directory artwork.
+         */
+        const profileImagePath =
             String(
-                student.image ?? ""
-            ).trim();
-
-        const hoverImage =
-            String(
-                student.hoverImage ?? ""
+                student.profileImage ?? ""
             ).trim();
 
         const initialImage =
-            mainImage ||
+            profileImagePath ||
             DEFAULT_STUDENT_IMAGE;
 
         profileImage.classList.remove(
             "profile-image-missing"
         );
 
-        profileImage.dataset.mainImage =
-            mainImage;
-
-        profileImage.dataset.hoverImage =
-            hoverImage;
+        profileImage.dataset.profileImage =
+            profileImagePath;
 
         profileImage.src =
             initialImage;
 
         profileImage.alt =
-            mainImage
+            profileImagePath
                 ? `Large profile photo of ${student.name}`
                 : `No profile image available for ${student.name}`;
 
@@ -684,51 +677,14 @@
         }
 
         /* --------------------------------------------------------
-           HOVER IMAGE
-           -------------------------------------------------------- */
-
-        profileImage.onmouseenter = () => {
-            if (!hoverImage) {
-                return;
-            }
-
-            profileImage.src =
-                hoverImage;
-        };
-
-        profileImage.onmouseleave = () => {
-            profileImage.src =
-                mainImage ||
-                DEFAULT_STUDENT_IMAGE;
-        };
-
-        /* --------------------------------------------------------
-           TOUCH IMAGE TOGGLE
-           -------------------------------------------------------- */
-
-        profileImage.onclick = () => {
-            if (!hoverImage) {
-                return;
-            }
-
-            const showingHoverImage =
-                profileImage.src.endsWith(
-                    hoverImage
-                );
-
-            profileImage.src =
-                showingHoverImage
-                    ? (
-                        mainImage ||
-                        DEFAULT_STUDENT_IMAGE
-                    )
-                    : hoverImage;
-        };
-
-        /* --------------------------------------------------------
            BROKEN IMAGE HANDLING
            -------------------------------------------------------- */
 
+        /**
+         * If the student's profile portrait cannot be loaded, fall
+         * back to the shared placeholder without creating another
+         * image-switching state on the profile page.
+         */
         profileImage.onerror = () => {
             profileImage.onerror = null;
 

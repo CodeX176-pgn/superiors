@@ -94,7 +94,7 @@ SUPERIORS — DIRECTORY & STUDENT CARDS
         opacity 0.35s ease;
 }
 
-.student-image.hover-student-image {
+.student-image.profile-student-image {
     position: absolute;
     inset: 0;
     opacity: 0;
@@ -312,12 +312,12 @@ SUPERIORS — DIRECTORY & STUDENT CARDS
         opacity: 1;
     }
 
-    .student-card:hover .hover-student-image {
+    .student-card:hover .profile-student-image {
         opacity: 1;
         transform: scale(1.045);
     }
 
-    .student-card:hover .main-student-image {
+    .student-card:hover .cover-student-image {
         transform: scale(1.02);
     }
 
@@ -337,7 +337,7 @@ SUPERIORS — DIRECTORY & STUDENT CARDS
     box-shadow: 0 18px 38px rgba(0, 0, 0, 0.46), var(--shadow-purple);
 }
 
-.student-card.active .hover-student-image {
+.student-card.active .profile-student-image {
     opacity: 1;
     transform: scale(1.03);
 }

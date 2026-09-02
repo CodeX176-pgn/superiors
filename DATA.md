@@ -90,8 +90,8 @@ Copy this template into the `"students"` array in `assets/data.json`:
         }
     ],
 
-    "image": "assets/images/students/student-main.png",
-    "hoverImage": "assets/images/students/student-hover.png"
+    "coverImage": "assets/images/students/student-cover.png",
+    "profileImage": "assets/images/students/student-profile.png"
 }
 ```
 
@@ -424,15 +424,15 @@ For example:
 assets/
 └── images/
     └── students/
-        ├── john-main.png
-        └── john-hover.png
+        ├── john-cover.png
+        └── john-profile.png
 ```
 
 The JSON should reference them using:
 
 ```json
-"image": "assets/images/students/john-main.png",
-"hoverImage": "assets/images/students/john-hover.png"
+"coverImage": "assets/images/students/john-cover.png",
+"profileImage": "assets/images/students/john-profile.png"
 ```
 
 ## Important
@@ -453,29 +453,29 @@ when following the current project structure.
 
 ---
 
-# Main Image
+# Cover Image
 
-The `image` field contains the normal image displayed on the student card and profile.
+The `coverImage` field contains the image displayed by default on the student card. It can be any image chosen for the student and is not required to be a portrait.
 
 ### Example
 
 ```json
-"image": "assets/images/students/john-main.png"
+"coverImage": "assets/images/students/john-cover.png"
 ```
 
 ---
 
-# Hover Image
+# Profile Image
 
-The `hoverImage` field contains the alternate image used by the student-card hover interaction.
+The `profileImage` field contains the student's actual/main portrait. On desktop, this image is revealed when the card is hovered; on touch devices, it is revealed when the card is activated.
 
 ### Example
 
 ```json
-"hoverImage": "assets/images/students/john-hover.png"
+"profileImage": "assets/images/students/john-profile.png"
 ```
 
-If a student does not have a separate hover image, follow the fallback behavior already implemented by the project rather than inventing a new path.
+If a student does not have a profile image yet, omit `profileImage`. The card will continue showing its cover image and the profile page will use the default profile placeholder.
 
 ---
 
@@ -489,7 +489,7 @@ assets/images/students/no_profile.png
 
 If a student's image is unavailable, the application can use this image as the fallback.
 
-Do not create a fake student image just to fill an empty field.
+Do not create a fake student portrait just to fill an empty `profileImage` field.
 
 ---
 
@@ -571,8 +571,8 @@ The following example uses the current social-media structure:
                 }
             ],
 
-            "image": "assets/images/students/alice-main.png",
-            "hoverImage": "assets/images/students/alice-hover.png"
+            "coverImage": "assets/images/students/alice-cover.png",
+            "profileImage": "assets/images/students/alice-profile.png"
         },
 
         {
@@ -607,8 +607,8 @@ The following example uses the current social-media structure:
                 }
             ],
 
-            "image": "assets/images/students/john-main.png",
-            "hoverImage": "assets/images/students/john-hover.png"
+            "coverImage": "assets/images/students/john-cover.png",
+            "profileImage": "assets/images/students/john-profile.png"
         }
     ]
 }
@@ -767,8 +767,8 @@ Before saving `assets/data.json`, check:
 * [ ] Every social-media entry has a `platform`.
 * [ ] Every social-media entry has a `username`.
 * [ ] Every social-media entry has a `displayName`.
-* [ ] Main image has been placed in `assets/images/students/`.
-* [ ] Hover image has been placed in `assets/images/students/` if available.
+* [ ] Cover image has been placed in `assets/images/students/`.
+* [ ] Profile image has been placed in `assets/images/students/` if available.
 * [ ] Image paths start with `assets/images/`.
 * [ ] No `serialNumber` was manually added.
 * [ ] JSON uses double quotes.
@@ -822,3 +822,16 @@ Actual student information
 ```
 
 This keeps the project easier to maintain and makes it clear where new student records should be add
+
+## Project Creator GitHub Availability
+
+Leslie's GitHub profile link is intentionally unavailable until the account/profile is ready. The footer does not contain a placeholder profile URL.
+
+To enable the link later, edit **`js/creators.js`** and change:
+
+```js
+const PARTNER_GITHUB_URL = "";
+```
+
+to the real GitHub profile URL. The footer will automatically become clickable and display the GitHub username from the URL.
+
