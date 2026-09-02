@@ -81,17 +81,17 @@
             "socialMedia": [
                 {
                     "platform": "tiktok",
-                    "userName": "",
+                    "username": "St blood",
                     "displayName": "St blood"
                 },
                 {
                     "platform": "youtube",
-                    "userName": "",
+                    "username": "Derick Ekeigwe",
                     "displayName": "Derick Ekeigwe"
                 },
                 {
                     "platform": "facebook",
-                    "userName": "",
+                    "username": "Derick Ekeigwe",
                     "displayName": "Derick Ekeigwe"
                 }
             ],
@@ -108,7 +108,6 @@
         {
             "name": "Eseni Felix",
             "nickname": "Vibez",
-            "title": "Most Corrupt",
             "phone": "+234 807 560 2343",
             "stateOfOrigin": "Ebonyi",
             "socialMedia": [
@@ -176,7 +175,6 @@
         {
             "name": "Nwaigwe Chidiebube",
             "nickname": "Deyon Jnr",
-            "title": "Best Basketballer",
             "phone": "+234 903 543 2368",
             "stateOfOrigin": "Imo",
             "hobbies": [
