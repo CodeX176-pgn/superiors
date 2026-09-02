@@ -398,3 +398,161 @@ SUPERIORS — DIRECTORY & STUDENT CARDS
     width: 36px;
     height: 36px;
 }
+
+/* =========================================================
+   MOBILE TOUCH IMAGE CAROUSEL
+   ========================================================= */
+
+/*
+   On touch devices, cards that HAVE a profile image use the
+   cover image and profile image as an automatic carousel.
+
+   IMPORTANT:
+   We deliberately use :has(.profile-student-image) here.
+   This means cards without a second/profile image are completely
+   excluded from the carousel and remain stationary.
+*/
+@media (hover: none) and (pointer: coarse) {
+
+    /*
+       The image container acts as the viewport for the carousel.
+
+       `overflow: hidden` is especially important here because the
+       profile image is translated outside the container during the
+       animation. Without clipping, part of that image can remain
+       visible beside the cover image — exactly what is happening
+       in the screenshot.
+    */
+    .student-card:has(.profile-student-image) .student-image-container {
+        position: relative;
+        overflow: hidden;
+        touch-action: pan-y;
+    }
+
+    /*
+       Only cards containing a profile image receive the carousel
+       animation.
+
+       Cards without `.profile-student-image` are intentionally
+       untouched, so their single image remains completely static.
+    */
+    .student-card:has(.profile-student-image)
+        .student-image-container
+        .cover-student-image {
+        will-change: transform;
+
+        animation:
+            mobileCoverCarousel
+            5s
+            ease-in-out
+            infinite;
+    }
+
+    /*
+       The profile image starts outside the RIGHT side of the image
+       container and slides into view during the second half of the
+       animation.
+    */
+    .student-card:has(.profile-student-image)
+        .student-image-container
+        .profile-student-image {
+
+        opacity: 1;
+        transform: translateX(100%);
+        will-change: transform;
+
+        animation:
+            mobileProfileCarousel
+            5s
+            ease-in-out
+            infinite;
+    }
+
+    /*
+       Prevent touchscreen browsers from emulating the desktop
+       hover/lift effect when the user taps a card.
+    */
+    .student-card:hover {
+        transform: none;
+        filter: none;
+        opacity: 1;
+    }
+
+    /*
+       Prevent the desktop "focus one card / dim the others" behavior
+       from being triggered by a touchscreen browser.
+    */
+    .students-grid:has(.student-card:hover) .student-card:not(:hover) {
+        filter: none;
+        opacity: 1;
+    }
+
+    /*
+       Extra safety:
+       Cards WITHOUT a profile image must NEVER receive the carousel
+       animation, even if another stylesheet accidentally targets
+       their cover image.
+    */
+    .student-card:not(:has(.profile-student-image))
+        .cover-student-image {
+        animation: none !important;
+        transform: none !important;
+        will-change: auto;
+    }
+}
+
+
+/* =========================================================
+   MOBILE CAROUSEL ANIMATION
+   ========================================================= */
+
+/*
+   COVER IMAGE
+   ---------------------------------------------------------
+   0–42%  → cover remains visible
+   42–52% → cover slides out to the left
+   52–90% → cover remains hidden
+   90–100% → cover returns to its original position
+*/
+@keyframes mobileCoverCarousel {
+
+    0%,
+    42% {
+        transform: translateX(0);
+    }
+
+    52%,
+    90% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+
+/*
+   PROFILE IMAGE
+   ---------------------------------------------------------
+   0–42%  → profile stays outside on the right
+   42–52% → profile slides into view
+   52–90% → profile remains visible
+   90–100% → profile slides out to the left
+*/
+@keyframes mobileProfileCarousel {
+
+    0%,
+    42% {
+        transform: translateX(100%);
+    }
+
+    52%,
+    90% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
