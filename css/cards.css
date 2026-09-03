@@ -9,13 +9,10 @@ SUPERIORS — DIRECTORY & STUDENT CARDS
    ========================================================= */
 
 .students-section {
-    width: min(1240px, 92%);
+    width: min(1220px, 92%);
     margin: 0 auto;
 
-    padding:
-        clamp(30px, 4vw, 48px)
-        0
-        clamp(44px, 6vw, 70px);
+    padding: 34px 0;
 
     flex: 1;
 }
@@ -23,7 +20,7 @@ SUPERIORS — DIRECTORY & STUDENT CARDS
 .students-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: clamp(16px, 2vw, 24px);
+    gap: 22px;
     align-items: start;
 }
 
@@ -107,6 +104,111 @@ SUPERIORS — DIRECTORY & STUDENT CARDS
 
 .student-image-container img {
     background: #080811;
+}
+
+/* =========================================================
+   7A. STUDENT CARD SKELETON LOADER
+   ========================================================= */
+
+/*
+   The skeleton replaces browser-native lazy-loading behavior with a
+   clear visual loading state. The card keeps its final dimensions
+   while the image and text placeholders shimmer underneath.
+*/
+.student-card.is-loading {
+    cursor: default;
+}
+
+.student-skeleton {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.075);
+}
+
+/*
+   A moving highlight gives the familiar skeleton shimmer effect.
+   The pseudo-element is deliberately subtle so it fits the existing
+   dark/purple SUPERIORS visual language.
+*/
+.student-skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.10) 50%,
+        transparent 100%
+    );
+
+    animation: studentSkeletonShimmer 1.45s ease-in-out infinite;
+}
+
+.student-image-skeleton {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    border-radius: 0;
+}
+
+.student-card.is-loading .student-image {
+    opacity: 0;
+}
+
+.student-card.is-loading .student-name {
+    opacity: 0;
+}
+
+.student-card.is-loading .student-image-overlay {
+    z-index: 4;
+}
+
+.student-card.is-loading .student-serial,
+.student-card.is-loading .student-nickname,
+.student-card.is-loading .student-title {
+    visibility: hidden;
+}
+
+.student-serial-skeleton {
+    width: 42px;
+    height: 12px;
+    margin-bottom: 9px;
+}
+
+.student-nickname-skeleton {
+    width: min(62%, 150px);
+    height: 20px;
+    margin-bottom: 7px;
+}
+
+.student-title-skeleton {
+    width: min(48%, 115px);
+    height: 12px;
+}
+
+.student-name-skeleton {
+    width: 68%;
+    height: 20px;
+    margin-bottom: 1px;
+}
+
+.student-card.is-loaded .student-skeleton {
+    display: none;
+}
+
+@keyframes studentSkeletonShimmer {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .student-skeleton::after {
+        animation: none;
+    }
 }
 
 /* =========================================================
@@ -346,21 +448,6 @@ SUPERIORS — DIRECTORY & STUDENT CARDS
    12. REFERENCE-MATCH CARD DIMENSIONS
    ========================================================= */
 
-/*
-   The desktop reference uses a narrower 4-card rail.  Keeping
-   this width separate from the footer/header rail creates the
-   same generous outer spacing seen around the cards.
-*/
-.students-section {
-    width: min(1220px, 92%);
-    padding-top: 34px;
-    padding-bottom: 34px;
-}
-
-.students-grid {
-    gap: 22px;
-}
-
 .student-card {
     border-radius: 16px;
 }
@@ -498,6 +585,25 @@ SUPERIORS — DIRECTORY & STUDENT CARDS
         animation: none !important;
         transform: none !important;
         will-change: auto;
+    }
+
+    /*
+       When a card is tapped into the active state on touch devices,
+       pause the carousel and display the profile image cleanly.
+    */
+    .student-card.active:has(.profile-student-image)
+        .student-image-container
+        .cover-student-image {
+        animation-play-state: paused;
+        transform: translateX(-100%);
+    }
+
+    .student-card.active:has(.profile-student-image)
+        .student-image-container
+        .profile-student-image {
+        animation-play-state: paused;
+        transform: translateX(0);
+        opacity: 1;
     }
 }
 

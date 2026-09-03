@@ -47,47 +47,21 @@
     /* ============================================================
        2. HOMEPAGE DETECTION
        ============================================================ */
-
-    /**
-     * Check whether the current document is the homepage.
-     *
-     * This prevents the intro controller from running on pages
-     * such as profile.html.
-     */
-    function isHomePage() {
-        const currentPath =
-            window.location.pathname;
-
-        return (
-            currentPath.endsWith("/") ||
-            currentPath.endsWith(`/${HOME_PAGE}`)
-        );
-    }
-
-    /**
-     * Stop immediately if this is not index.html.
-     */
-    if (!isHomePage()) {
-        return;
-    }
-
-
     /* ============================================================
-       3. FIND INTRO ELEMENT
+       2. FIND INTRO ELEMENT
        ============================================================ */
 
     /**
      * Main cinematic intro container.
+     *
+     * This element only exists on index.html. If it is not in the DOM,
+     * this is not the homepage and there is nothing to control.
      */
     const intro =
         document.getElementById(
             "superiorsIntro"
         );
 
-    /**
-     * If the intro markup does not exist, there is nothing
-     * for this script to control.
-     */
     if (!intro) {
         return;
     }

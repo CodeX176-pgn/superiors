@@ -25,8 +25,8 @@ SUPERIORS — HEADER & SEARCH
 }
 
 .header-container {
-    width: min(1240px, 92%);
-    min-height: 72px;
+    width: min(1288px, 92%);
+    min-height: 80px;
     margin: 0 auto;
 
     display: flex;
@@ -67,7 +67,7 @@ SUPERIORS — HEADER & SEARCH
 
 .search-wrapper {
     position: relative;
-    width: min(420px, 100%);
+    width: min(500px, 100%);
 }
 
 .search-icon {
@@ -191,26 +191,4 @@ SUPERIORS — HEADER & SEARCH
 .back-button svg {
     width: 17px;
     height: 17px;
-}
-
-/* =========================================================
-   5. REFERENCE-MATCH HEADER SIZING
-   ========================================================= */
-
-/*
-   The reference design uses a compact centered content rail
-   rather than stretching the header elements across the full
-   desktop viewport.
-*/
-.header-container {
-    width: min(1288px, 92%);
-    min-height: 80px;
-}
-
-.search-wrapper {
-    width: min(500px, 100%);
-}
-
-.search-input {
-    height: 48px;
 }

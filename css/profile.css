@@ -278,22 +278,20 @@ SUPERIORS — PROFILE PAGE
  * still shrinking slightly on narrower desktop screens.
  */
 .profile-image-card {
-    position: fixed;
-
+    position: sticky;
     top: 100px;
-    right: clamp(18px, 4vw, 60px);
 
-    width: min(412px, 32vw);
+    width: 100%;
 
     /*
-     * Prevent the fixed image from becoming taller than the
+     * Prevent the sticky image from becoming taller than the
      * available viewport.
      */
     max-height: calc(100vh - 120px);
 
     overflow: hidden;
 
-    border-radius: 22px;
+    border-radius: 21px;
 
     background: rgba(8, 8, 17, 0.86);
     border: 1px solid rgba(190, 151, 255, 0.24);
@@ -495,15 +493,6 @@ SUPERIORS — PROFILE PAGE
 
 .profile-name {
     font-size: clamp(42px, 5vw, 64px);
-}
-
-.profile-table-wrapper {
-    margin-top: 58px;
-}
-
-.profile-image-card {
-    top: 100px;
-    border-radius: 21px;
 }
 
 .profile-large-image {

@@ -38,26 +38,34 @@
             .trim()
             .toLowerCase();
 
+        const allStudents = Array.isArray(window.students)
+            ? window.students
+            : [];
+
         /**
          * An empty query restores the complete directory.
          */
         if (!query) {
-            displayStudents(students);
+            displayStudents(allStudents);
             return;
         }
 
         /**
-         * Search both the student's name and serial number.
+         * Search student name, nickname, and serial number.
          */
-        const matchingStudents = students.filter((student) => {
+        const matchingStudents = allStudents.filter((student) => {
             const studentName =
                 String(student.name ?? "").toLowerCase();
+
+            const studentNickname =
+                String(student.nickname ?? "").toLowerCase();
 
             const studentSerial =
                 String(student.serialNumber ?? "").toLowerCase();
 
             return (
                 studentName.includes(query) ||
+                studentNickname.includes(query) ||
                 studentSerial.includes(query)
             );
         });

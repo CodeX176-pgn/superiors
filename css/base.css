@@ -89,14 +89,14 @@ body::before {
     background-image:
         linear-gradient(
             180deg,
-            rgba(3, 3, 10, 0.48) 0%,
-            rgba(5, 4, 15, 0.58) 50%,
-            rgba(3, 3, 10, 0.72) 100%
+            rgba(3, 3, 10, 0.34) 0%,
+            rgba(5, 4, 15, 0.52) 48%,
+            rgba(3, 3, 10, 0.68) 100%
         ),
         url("../assets/images/superiors_background.png");
 
     background-size: cover;
-    background-position: center;
+    background-position: center 42%;
     background-repeat: no-repeat;
     background-attachment: fixed;
 
@@ -175,30 +175,4 @@ a {
         opacity: 1;
         transform: scale(1);
     }
-}
-
-/* =========================================================
-   31. REFERENCE-MATCH BACKGROUND REFINEMENT
-   ========================================================= */
-
-/*
-   The supplied artwork is intentionally kept as a fixed,
-   full-viewport background.  A slightly lighter top-to-bottom
-   veil lets the decorative purple details remain visible while
-   preserving strong contrast for the directory content.
-*/
-body::before {
-    background-image:
-        linear-gradient(
-            180deg,
-            rgba(3, 3, 10, 0.34) 0%,
-            rgba(5, 4, 15, 0.52) 48%,
-            rgba(3, 3, 10, 0.68) 100%
-        ),
-        url("../assets/images/superiors_background.png");
-
-    background-size: cover;
-    background-position: center 42%;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
 }

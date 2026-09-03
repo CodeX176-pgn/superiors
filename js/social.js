@@ -76,22 +76,22 @@ const SOCIAL_ICON_NAMES = {
 const SOCIAL_URL_BUILDERS = {
 
     youtube: (username) =>
-        `https://youtube.com/@${username}`,
+        `https://youtube.com/@${encodeURIComponent(username)}`,
 
     tiktok: (username) =>
-        `https://tiktok.com/@${username}`,
+        `https://tiktok.com/@${encodeURIComponent(username)}`,
 
     twitter: (username) =>
-        `https://twitter.com/@${username}`,
+        `https://twitter.com/${encodeURIComponent(username)}`,
 
     x: (username) =>
-        `https://x.com/@${username}`,
+        `https://x.com/${encodeURIComponent(username)}`,
 
     facebook: (username) =>
-        `https://facebook.com/@${username}`,
+        `https://facebook.com/${encodeURIComponent(username)}`,
 
     github: (username) =>
-        `https://github.com/@${username}`
+        `https://github.com/${encodeURIComponent(username)}`
 
 };
 

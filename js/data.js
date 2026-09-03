@@ -44,8 +44,8 @@
 
             // Sort students alphabetically by full name.
             data.students.sort((studentA, studentB) => {
-                return studentA.name.localeCompare(
-                    studentB.name,
+                return String(studentA.name ?? "").localeCompare(
+                    String(studentB.name ?? ""),
                     undefined,
                     { sensitivity: "base" }
                 );

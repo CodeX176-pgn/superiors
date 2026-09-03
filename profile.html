@@ -9,7 +9,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <link rel="icon" href="assets/images/superiors_icon.png" type="png/image">
+    <link rel="icon" href="assets/images/superiors_icon.png" type="image/png">
     <!-- JavaScript replaces this title with the student's name. -->
     <title>Student Profile — SUPERIORS</title>
 
@@ -232,6 +232,117 @@
         </a>
     </section>
 
+    <!-- ========================================================
+        SITE FOOTER
+        ======================================================== -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <!-- Footer Branding -->
+            <div class="footer-brand">
+                <a
+                    href="index.html"
+                    class="footer-logo"
+                    aria-label="SUPERIORS Home"
+                    data-skip-intro
+                >
+                    SUPERIORS
+                </a>
+
+                <p class="footer-tagline">
+                    The official student directory and showcase profiles.
+                </p>
+
+                <img
+                    class="footer-brand-mark"
+                    src="assets/images/superiors_icon.png"
+                    alt=""
+                    aria-hidden="true"
+                    loading="lazy"
+                    decoding="async"
+                >
+            </div>
+
+            <!-- Footer Navigation -->
+            <nav class="footer-nav" aria-label="Footer Navigation">
+                <h3 class="footer-heading">
+                    Navigation
+                </h3>
+
+                <ul class="footer-links">
+                    <li>
+                        <a
+                            href="index.html"
+                            class="footer-link"
+                            data-skip-intro
+                        >
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a
+                            href="index.html#main-content"
+                            class="footer-link"
+                            data-skip-intro
+                        >
+                            Browse Students
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Project Creators -->
+            <div class="footer-creators">
+                <h3 class="footer-heading">
+                    Created By
+                </h3>
+
+                <ul class="creator-list">
+                    <li class="creator-item">
+                        <a
+                            href="https://github.com/codex176-pgn"
+                            class="creator-github-link"
+                            id="creatorGithubLink"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="CodeX on GitHub (CodeX176-pgn)"
+                            title="CodeX on GitHub"
+                        >
+                            <i class="ri-github-fill" aria-hidden="true"></i>
+                            <span class="creator-name">CodeX</span>
+                            <span class="creator-handle">CodeX176-pgn</span>
+                        </a>
+                    </li>
+
+                    <li class="creator-item">
+                        <a
+                            class="creator-github-link creator-github-link--unavailable"
+                            id="partnerGithubLink"
+                            aria-disabled="true"
+                            aria-label="Leslie's GitHub profile is currently unavailable"
+                            title="Leslie's GitHub profile is currently unavailable"
+                        >
+                            <i class="ri-github-fill" aria-hidden="true"></i>
+                            <span class="creator-name">Leslie</span>
+                            <span class="creator-handle">GitHub unavailable</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-container">
+                <p class="footer-copyright">
+                    &copy; 2026 SUPERIORS.
+                    Developed by CodeX &amp; Leslie.
+                    <br>
+                    Worldwide 2K29 Prodigies
+                </p>
+            </div>
+        </div>
+    </footer>
+
     <!-- Student data must be loaded before profile.js -->
     <script src="js/data.js"></script>
 
@@ -240,6 +351,9 @@
 
     <!-- Profile-specific JavaScript -->
     <script src="js/profile.js"></script>
+
+    <!-- Project creators link controller -->
+    <script src="js/creators.js"></script>
 
 </body>
 </html>

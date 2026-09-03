@@ -70,7 +70,11 @@
            ---------------------------------------------------- */
         const card = document.createElement("article");
 
-        card.className = "student-card";
+        // Start each card in a loading state. CSS uses this class to
+        // display the shimmer placeholders until the cover image is
+        // ready, then JavaScript removes it from the card.
+        card.className = "student-card is-loading";
+        card.setAttribute("aria-busy", "true");
         card.dataset.studentId =
             String(student.serialNumber ?? "");
 
@@ -114,6 +118,16 @@
          */
         const coverImageValue =
             String(student.coverImage ?? "").trim();
+
+        /*
+         * A student without a supplied cover image uses the shared
+         * no_profile.png placeholder. Because this placeholder is part
+         * of the website itself (rather than a remotely downloaded
+         * student image), we can treat this case as immediately ready.
+         * This makes students without photos appear faster instead of
+         * unnecessarily waiting through the skeleton animation.
+         */
+        const usesDefaultCoverImage = !coverImageValue;
 
         const coverImage =
             escapeHTML(
@@ -172,12 +186,22 @@
             >
                 <div class="student-image-container">
 
+                    <!--
+                        Skeleton image placeholder. It remains visible
+                        while the real cover image is being downloaded.
+                        aria-hidden keeps the decorative loader out of
+                        the screen-reader reading order.
+                    -->
+                    <div
+                        class="student-skeleton student-image-skeleton"
+                        aria-hidden="true"
+                    ></div>
+
                     <!-- Student cover image shown by default -->
                     <img
                         class="student-image cover-student-image"
                         src="${coverImage}"
                         alt="Photo of ${name}"
-                        loading="lazy"
                         decoding="async"
                     >
 
@@ -190,7 +214,6 @@
                                     src="${profileImage}"
                                     alt=""
                                     aria-hidden="true"
-                                    loading="lazy"
                                     decoding="async"
                                 >
                             `
@@ -202,6 +225,10 @@
                         class="student-image-overlay"
                         aria-hidden="true"
                     >
+                        <!-- Metadata skeletons preserve the card's text shape while loading. -->
+                        <div class="student-skeleton student-serial-skeleton"></div>
+                        <div class="student-skeleton student-nickname-skeleton"></div>
+                        <div class="student-skeleton student-title-skeleton"></div>
                         <span class="student-serial">
                             #${serialNumber}
                         </span>
@@ -232,6 +259,12 @@
 
                 <!-- Student name -->
                 <div class="student-info">
+                    <!-- Text skeleton shown until the card image is ready. -->
+                    <div
+                        class="student-skeleton student-name-skeleton"
+                        aria-hidden="true"
+                    ></div>
+
                     <h2 class="student-name">
                         ${name}
                     </h2>
@@ -291,8 +324,27 @@
         if (coverImageElement) {
 
             /**
+             * Finish the skeleton state after the cover image is ready.
+             * The `complete` check also handles images served from the
+             * browser cache, where a normal `load` event may happen
+             * before the listener is attached.
+             */
+            const finishCardLoading = () => {
+                card.classList.remove("is-loading");
+                card.classList.add("is-loaded");
+                card.removeAttribute("aria-busy");
+            };
+
+            coverImageElement.addEventListener(
+                "load",
+                finishCardLoading,
+                { once: true }
+            );
+
+            /**
              * Replace a broken student image with the default
-             * unavailable placeholder.
+             * unavailable placeholder. The second `load` event will
+             * then complete the skeleton lifecycle normally.
              */
             coverImageElement.addEventListener(
                 "error",
@@ -303,6 +355,29 @@
                 },
                 { once: true }
             );
+
+            /*
+             * Cards that intentionally use no_profile.png should not be
+             * held behind the skeleton. The fallback image is bundled
+             * locally with the site, so reveal this card immediately.
+             * The image itself is still allowed to load/paint normally.
+             */
+            if (usesDefaultCoverImage) {
+                finishCardLoading();
+            } else if (coverImageElement.complete) {
+                /*
+                 * For a real student cover image, keep the normal
+                 * skeleton lifecycle. Cached successful images can be
+                 * revealed immediately; cached failures go through the
+                 * existing fallback handler.
+                 */
+                if (coverImageElement.naturalWidth > 0) {
+                    finishCardLoading();
+                } else {
+                    // Trigger the fallback path for a cached broken image.
+                    coverImageElement.dispatchEvent(new Event("error"));
+                }
+            }
         }
 
 
@@ -344,11 +419,23 @@
             card.querySelector(".student-profile-link");
 
         if (profileLink) {
-            profileLink.addEventListener("click", () => {
+            profileLink.addEventListener("click", (event) => {
                 sessionStorage.setItem(
-                    "superiorsReturningFromProfile",
+                    "superiorsSkipIntro",
                     "true"
                 );
+
+                if (window.matchMedia("(hover: none)").matches) {
+                    // On touch devices, if tapping the image container and card isn't active yet,
+                    // reveal the profile image first instead of immediately navigating.
+                    if (event.target.closest(".student-image-container") && !card.classList.contains("active")) {
+                        event.preventDefault();
+                        if (directory.touch && directory.touch.clearActiveCards) {
+                            directory.touch.clearActiveCards();
+                        }
+                        card.classList.add("active");
+                    }
+                }
             });
         }
 
@@ -390,7 +477,7 @@
              * returning to the homepage doesn't replay the intro.
              */
             sessionStorage.setItem(
-                "superiorsReturningFromProfile",
+                "superiorsSkipIntro",
                 "true"
             );
 
